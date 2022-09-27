@@ -1,0 +1,25 @@
+{
+  "state_management": "getx",
+  "modules": [
+    "home",
+    "berita",
+    "event",
+    "donasi_campaign",
+    "bursa_kerja",
+    "sandbox",
+    "berita_detail",
+    "event_detail",
+    "donasi_campaign_detail",
+    "bursa_kerja_detail",
+    "alumni_list",
+    "alumni_detail",
+    "user_profile",
+    "iuran_history",
+    "donasi_history",
+    "faq",
+    "main",
+    "login",
+    "register",
+    "forgot_password"
+  ]
+}

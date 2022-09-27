@@ -1,0 +1,485 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:kafegama/core.dart';
+import 'package:kafegama/model/berita/berita_list.dart';
+import 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
+import 'package:kafegama/model/event/event_list.dart';
+
+class HomeView extends StatelessWidget {
+  const HomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (controller) {
+        controller.view = this;
+
+        return Scaffold(
+          backgroundColor: Colors.grey[100],
+          body: SafeArea(
+            child: RefreshIndicator(
+              onRefresh: () => controller.handleRefresh(),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //
+                    //Header
+                    //
+                    Obx(() {
+                      var user = controller.user.value;
+                      return user.id == null
+                          ? Container(
+                              width: double.infinity,
+                              height: 80,
+                              color: Colors.transparent,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.blueGrey,
+                                      ),
+                                      onPressed: () {
+                                        Get.off(const LoginView());
+                                      },
+                                      child: const Text("Login"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              width: double.infinity,
+                              height: 80,
+                              color: Colors.transparent,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(80),
+                                          image: const DecorationImage(
+                                            image: NetworkImage(
+                                              "https://i.ibb.co/PGv8ZzG/me.jpg",
+                                            ),
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Hi," + user.name!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .caption!
+                                                .copyWith(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                    }),
+
+                    //
+                    //Event
+                    //
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "Event",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(() => const EventView());
+                                      },
+                                      child: const Text(
+                                        "Lihat Semua",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Obx(() {
+                                var eventList = controller.eventList.value;
+                                return controller.isLoading.value
+                                    ? SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: const Center(
+                                            child: Text("..loading...")),
+                                      )
+                                    : EventListView(eventList: eventList);
+                              }),
+                            ])),
+                    const SizedBox(height: 10),
+
+                    //
+                    //Berita
+                    //
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "Berita",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(() => const BeritaView());
+                                      },
+                                      child: const Text(
+                                        "Lihat Semua",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Obx(() {
+                                var beritaList = controller.beritaList.value;
+                                return controller.isLoading.value
+                                    ? SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: const Center(
+                                            child: Text("..loading...")),
+                                      )
+                                    : BeritaListView(beritaList: beritaList);
+                              }),
+                            ])),
+                    const SizedBox(height: 10),
+
+                    //
+                    //Donasi
+                    //
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      "Donasi",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(
+                                            () => const DonasiCampaignView());
+                                      },
+                                      child: const Text(
+                                        "Lihat Semua",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Obx(() {
+                                var donasiCampaignList =
+                                    controller.donasiCampaignList.value;
+                                return controller.isLoading.value
+                                    ? SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: const Center(
+                                            child: Text("..loading...")),
+                                      )
+                                    : DonasiCampaignListView(
+                                        donasiCampaignList: donasiCampaignList);
+                              }),
+                            ])),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class BeritaListView extends StatelessWidget {
+  const BeritaListView({
+    Key? key,
+    required this.beritaList,
+  }) : super(key: key);
+
+  final BeritaList beritaList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        itemCount: beritaList.data?.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          var berita = beritaList.data?.elementAt(index);
+          return berita == null
+              ? const SizedBox(height: 10)
+              : InkWell(
+                  onTap: () {
+                    Get.to(() => const BeritaDetailView(), arguments: [
+                      {"berita": berita}
+                    ]);
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.cyan,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    berita.picture!,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: Text(
+                                  berita.title!,
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 5,
+                                  softWrap: true,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+        },
+      ),
+    );
+  }
+}
+
+class EventListView extends StatelessWidget {
+  const EventListView({
+    Key? key,
+    required this.eventList,
+  }) : super(key: key);
+
+  final EventList eventList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        itemCount: eventList.data?.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          var event = eventList.data?.elementAt(index);
+          return event == null
+              ? const SizedBox(height: 10)
+              : InkWell(
+                  onTap: () {
+                    Get.to(() => const EventDetailView(), arguments: [
+                      {"event": event}
+                    ]);
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.cyan,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    event.picture!,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: Text(
+                                  event.title!,
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 5,
+                                  softWrap: true,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+        },
+      ),
+    );
+  }
+}
+
+class DonasiCampaignListView extends StatelessWidget {
+  const DonasiCampaignListView({
+    Key? key,
+    required this.donasiCampaignList,
+  }) : super(key: key);
+
+  final DonasiCampaignList donasiCampaignList;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        itemCount: donasiCampaignList.data?.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          var donasiCampaign = donasiCampaignList.data?.elementAt(index);
+          return donasiCampaign == null
+              ? const SizedBox(height: 10)
+              : InkWell(
+                  onTap: () {
+                    Get.to(() => const DonasiCampaignDetailView(), arguments: [
+                      {"donasiCampaign": donasiCampaign}
+                    ]);
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 150,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.cyan,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    donasiCampaign.picture!,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: Text(
+                                  donasiCampaign.title!,
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 5,
+                                  softWrap: true,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+        },
+      ),
+    );
+  }
+}

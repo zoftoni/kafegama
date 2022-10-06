@@ -41,7 +41,7 @@ class DonasiCampaignDetailView extends StatelessWidget {
                                 controller.launchImageUrl();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey,
+                                backgroundColor: Colors.blueGrey,
                               ),
                               child: const Text("Buka Gambar"),
                             ),
@@ -64,7 +64,7 @@ class DonasiCampaignDetailView extends StatelessWidget {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey,
+                                backgroundColor: Colors.blueGrey,
                               ),
                               onPressed: () {},
                               child: const Text("Donasi"),

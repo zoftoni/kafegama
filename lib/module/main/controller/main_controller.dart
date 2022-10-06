@@ -13,11 +13,11 @@ class MainController extends GetxController
     tabController = TabController(vsync: this, length: 4);
   }
 
-  @override
-  void onClose() {
-    tabController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   tabController.dispose();
+  //   super.onClose();
+  // }
 
   void goToHome() {
     tabController.animateTo(0);

@@ -12,6 +12,7 @@ class AlumniList {
   Links? links;
   Meta? meta;
   String? error;
+  int? responseCode;
 
   AlumniList({this.data, this.links, this.meta, this.error});
 
@@ -20,7 +21,7 @@ class AlumniList {
   }
 
   Map<String, dynamic> toJson() => _$AlumniListToJson(this);
-  AlumniList.withError(String errorValue)
+  AlumniList.withError(String errorValue, int this.responseCode)
       : data = null,
         error = errorValue;
 }

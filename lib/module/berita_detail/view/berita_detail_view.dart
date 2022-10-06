@@ -16,7 +16,19 @@ class BeritaDetailView extends StatelessWidget {
         var berita = controller.berita.value;
 
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color.fromRGBO(214, 41, 118, 1),
+                      Color.fromRGBO(150, 47, 191, 1)
+                    ]),
+              ),
+            ),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -41,7 +53,7 @@ class BeritaDetailView extends StatelessWidget {
                                 controller.launchImageUrl();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey,
+                                backgroundColor: Colors.blueGrey,
                               ),
                               child: const Text("Buka Gambar"),
                             ),

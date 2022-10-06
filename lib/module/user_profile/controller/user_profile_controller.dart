@@ -17,11 +17,10 @@ class UserProfileController extends GetxController {
     this.mainController,
   );
 
-  @override
-  void onInit() {
-    print("init");
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  // }
 
   Future<void> logout() async {
     isLoading.value = true;

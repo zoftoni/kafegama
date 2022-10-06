@@ -41,7 +41,7 @@ class EventDetailView extends StatelessWidget {
                                 controller.launchImageUrl();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey,
+                                backgroundColor: Colors.blueGrey,
                               ),
                               child: const Text("Buka Gambar"),
                             ),

@@ -12,6 +12,7 @@ class BeritaList {
   Links? links;
   Meta? meta;
   String? error;
+  int? responseCode;
 
   BeritaList({this.data, this.links, this.meta, this.error});
 
@@ -20,7 +21,7 @@ class BeritaList {
   }
 
   Map<String, dynamic> toJson() => _$BeritaListToJson(this);
-  BeritaList.withError(String errorValue)
+  BeritaList.withError(String errorValue, int this.responseCode)
       : data = null,
         error = errorValue;
 }

@@ -20,7 +20,7 @@ class LoginView extends StatelessWidget {
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                 elevation: 0,
-                primary: const Color(0xFF6F35A5),
+                backgroundColor: const Color(0xFF6F35A5),
                 shape: const StadiumBorder(),
                 maximumSize: const Size(double.infinity, 56),
                 minimumSize: const Size(double.infinity, 56),
@@ -136,7 +136,7 @@ class LoginView extends StatelessWidget {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Get.to(const RegisterView());
+                                              controller.openRegister();
                                             },
                                             child: const Text(
                                               "Register",
@@ -162,8 +162,8 @@ class LoginView extends StatelessWidget {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              Get.to(
-                                                  const ForgotPasswordView());
+                                              Get.to(controller
+                                                  .openResetPassword());
                                             },
                                             child: const Text(
                                               "Reset Password",

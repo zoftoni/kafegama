@@ -13,9 +13,10 @@ import 'package:kafegama/model/login_response.dart';
 import 'app_interceptors.dart';
 
 class APIProvider {
-  static const String _baseUrl = 'http://192.168.1.4/kafegama/public/api/';
+  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
 
   static const String _LOGIN = 'login';
+  static const String _REGISTER = 'register-user';
   static const String _LOGOUT = 'logout';
   static const String _BERITA = 'berita';
   static const String _EVENT = 'event';
@@ -98,6 +99,28 @@ class APIProvider {
     }
   }
 
+  Future<MessageResponse> register(
+      name, email, password, passwordConfirmation) async {
+    try {
+      _dio.options.connectTimeout = 30000; //30s
+      _dio.options.receiveTimeout = 50000;
+      // String url = _baseUrl + _LOGIN;
+      Response response = await _dio.post(_REGISTER, data: {
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': passwordConfirmation
+      });
+      // throwIfNoSuccess(response);
+      return MessageResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+
+      return MessageResponse.withError(_handleError(e));
+    }
+  }
+
   Future<MessageResponse> logout() async {
     try {
       // String url = _baseUrl + _LOGIN;
@@ -126,7 +149,8 @@ class APIProvider {
     } on DioError catch (e) {
       // print("error");
       // print("Exception occured: $error stackTrace: $stacktrace");
-      return BeritaList.withError(_handleError(e));
+      return BeritaList.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
     }
   }
 
@@ -140,7 +164,8 @@ class APIProvider {
     } on DioError catch (e) {
       // print("error");
       // print("Exception occured: $error stackTrace: $stacktrace");
-      return BeritaList.withError(_handleError(e));
+      return BeritaList.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
     }
   }
   //////////////////////
@@ -241,7 +266,8 @@ class APIProvider {
     } on DioError catch (e) {
       // print("error");
       // print("Exception occured: $error stackTrace: $stacktrace");
-      return AlumniList.withError(_handleError(e));
+      return AlumniList.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
     }
   }
   //////////////////////

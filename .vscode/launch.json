@@ -4,10 +4,15 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "kafegama",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            // "args": [
+            //     "-d",
+            //     "chrome"
+            //   ]
         },
         {
             "name": "kafegama (profile mode)",

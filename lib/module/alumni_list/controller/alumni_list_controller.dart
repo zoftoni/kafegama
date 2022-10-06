@@ -29,6 +29,17 @@ class AlumniListController extends GetxController {
     try {
       final result = await apiProvider.getAlumni(++page, keyword);
       AlumniList resultList = result;
+      // error
+      if (resultList.error != null) {
+        Get.snackbar(
+          "Error",
+          "error:: " + resultList.error!,
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.white,
+        );
+        return;
+      }
+      /////
       if (page > resultList.meta!.lastPage!.toInt()) {
         return;
       }

@@ -28,6 +28,8 @@ class MainView extends StatelessWidget {
           bottomNavigationBar: Container(
             color: Colors.blueGrey,
             child: TabBar(
+              indicatorColor: Colors.white,
+              labelStyle: const TextStyle(fontSize: 12.0),
               controller: controller.tabController,
               tabs: const [
                 Tab(

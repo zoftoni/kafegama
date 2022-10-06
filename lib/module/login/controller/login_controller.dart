@@ -3,6 +3,7 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
 import 'package:kafegama/service/api_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginController extends GetxController {
   LoginView? view;
@@ -40,7 +41,7 @@ class LoginController extends GetxController {
         await SessionManager().set("USER", result.user).then((value) =>
             SessionManager()
                 .set("TOKEN", result.accessToken)
-                .then((value) => Get.to(() => const MainView())));
+                .then((value) => Get.back(result: 'success')));
       } catch (e) {
         Get.snackbar(
           "Error",
@@ -52,5 +53,17 @@ class LoginController extends GetxController {
         isLoading.value = false;
       }
     }
+  }
+
+  openResetPassword() async {
+    if (!await launchUrl(
+        Uri.parse("http://10.0.2.2/kafegama/public/admin/password/reset"),
+        mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch url';
+    }
+  }
+
+  openRegister() async {
+    Get.to(() => const RegisterView());
   }
 }

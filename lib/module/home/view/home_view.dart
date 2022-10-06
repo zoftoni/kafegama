@@ -40,10 +40,10 @@ class HomeView extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.blueGrey,
+                                        backgroundColor: Colors.blueGrey,
                                       ),
                                       onPressed: () {
-                                        Get.off(const LoginView());
+                                        controller.openLogin();
                                       },
                                       child: const Text("Login"),
                                     ),
@@ -54,22 +54,16 @@ class HomeView extends StatelessWidget {
                           : Container(
                               width: double.infinity,
                               height: 80,
-                              color: Colors.transparent,
+                              color: Colors.grey[200],
                               child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Row(
                                   children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(80),
-                                          image: const DecorationImage(
-                                            image: NetworkImage(
-                                              "https://i.ibb.co/PGv8ZzG/me.jpg",
-                                            ),
-                                          )),
+                                    const CircleAvatar(
+                                      radius: 25,
+                                      backgroundImage: NetworkImage(
+                                        'https://i.ibb.co/PGv8ZzG/me.jpg',
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -92,7 +86,6 @@ class HomeView extends StatelessWidget {
                               ),
                             );
                     }),
-
                     //
                     //Event
                     //
@@ -139,7 +132,9 @@ class HomeView extends StatelessWidget {
                                         child: const Center(
                                             child: Text("..loading...")),
                                       )
-                                    : EventListView(eventList: eventList);
+                                    : eventList.error == null
+                                        ? EventListView(eventList: eventList)
+                                        : Text(eventList.error!);
                               }),
                             ])),
                     const SizedBox(height: 10),
@@ -190,7 +185,9 @@ class HomeView extends StatelessWidget {
                                         child: const Center(
                                             child: Text("..loading...")),
                                       )
-                                    : BeritaListView(beritaList: beritaList);
+                                    : beritaList.error == null
+                                        ? BeritaListView(beritaList: beritaList)
+                                        : Text(beritaList.error!);
                               }),
                             ])),
                     const SizedBox(height: 10),
@@ -243,8 +240,11 @@ class HomeView extends StatelessWidget {
                                         child: const Center(
                                             child: Text("..loading...")),
                                       )
-                                    : DonasiCampaignListView(
-                                        donasiCampaignList: donasiCampaignList);
+                                    : donasiCampaignList.error == null
+                                        ? DonasiCampaignListView(
+                                            donasiCampaignList:
+                                                donasiCampaignList)
+                                        : Text(donasiCampaignList.error!);
                               }),
                             ])),
                     const SizedBox(height: 10),
@@ -270,7 +270,7 @@ class BeritaListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 290,
       child: ListView.builder(
         itemCount: beritaList.data?.length,
         scrollDirection: Axis.horizontal,
@@ -290,7 +290,7 @@ class BeritaListView extends StatelessWidget {
                     ),
                     child: IntrinsicHeight(
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

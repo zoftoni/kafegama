@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-var primaryColor = Colors.blueGrey[800];
+var primaryColor = const Color(0xFF6F35A5);
 var secondaryColor = const Color(0xFF2A2D3E);
 var bgColor = const Color(0xFF212332);
 var defaultPadding = 16.0;

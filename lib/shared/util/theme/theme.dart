@@ -27,7 +27,7 @@ var defaultTheme = ThemeData(
       color: Colors.white,
     ),
   ),
-  textTheme: GoogleFonts.robotoMonoTextTheme().copyWith(
+  textTheme: GoogleFonts.poppinsTextTheme().copyWith(
     headline1: TextStyle(
       color: Colors.grey[800],
     ),
@@ -39,6 +39,24 @@ var defaultTheme = ThemeData(
     ),
     bodyText2: TextStyle(
       color: Colors.grey[800],
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 0,
+      backgroundColor: const Color(0xFF6F35A5),
+      shape: const StadiumBorder(),
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    filled: true,
+    fillColor: Color(0xFFF1E6FF),
+    iconColor: Color(0xFF6F35A5),
+    prefixIconColor: Color(0xFF6F35A5),
+    contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      borderSide: BorderSide.none,
     ),
   ),
 );

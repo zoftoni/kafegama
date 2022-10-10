@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 import '../controller/alumni_detail_controller.dart';
 
 import 'package:get/get.dart';
@@ -25,11 +26,12 @@ class AlumniDetailView extends StatelessWidget {
           backgroundColor: Colors.grey[300],
           appBar: AppBar(
             elevation: 0.0,
-            backgroundColor: Colors.blueGrey[800],
+            flexibleSpace: const AppBarBG(),
+            centerTitle: true,
             iconTheme: const IconThemeData(
               color: Colors.white,
             ),
-            title: const Text("Data Alumni"),
+            title: const Text("DATA ALUMNI"),
           ),
           body: SingleChildScrollView(
             controller: ScrollController(),
@@ -40,7 +42,15 @@ class AlumniDetailView extends StatelessWidget {
                     maxHeight: 110.0,
                   ),
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.blueGrey[800],
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Color.fromRGBO(214, 41, 118, 1),
+                          Color.fromRGBO(150, 47, 191, 1)
+                        ]),
+                  ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20.0,
                   ),
@@ -77,6 +87,26 @@ class AlumniDetailView extends StatelessWidget {
                       ),
                       const SizedBox(
                         width: 8.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            "Angkatan",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                          Text(
+                            "1995",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

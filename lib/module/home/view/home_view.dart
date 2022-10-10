@@ -4,6 +4,7 @@ import 'package:kafegama/core.dart';
 import 'package:kafegama/model/berita/berita_list.dart';
 import 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
 import 'package:kafegama/model/event/event_list.dart';
+import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -16,7 +17,15 @@ class HomeView extends StatelessWidget {
         controller.view = this;
 
         return Scaffold(
-          backgroundColor: Colors.grey[100],
+          appBar: AppBar(
+            elevation: 0.0,
+            flexibleSpace: const AppBarBG(),
+            centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
+            title: const Text("BERANDA"),
+          ),
           body: SafeArea(
             child: RefreshIndicator(
               onRefresh: () => controller.handleRefresh(),
@@ -24,6 +33,34 @@ class HomeView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Image.asset(
+                              "assets/image/homeatmontain.jpg",
+                              width: double.infinity,
+                              height: 150.0,
+                              fit: BoxFit.cover,
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 50.0,
+                                ),
+                                Image.asset(
+                                  "assets/image/logo.png",
+                                  width: double.infinity,
+                                  height: 80.0,
+                                  alignment: Alignment.center,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+
                     //
                     //Header
                     //
@@ -40,7 +77,7 @@ class HomeView extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.blueGrey,
+                                        elevation: 0,
                                       ),
                                       onPressed: () {
                                         controller.openLogin();
@@ -51,10 +88,9 @@ class HomeView extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : Container(
+                          : SizedBox(
                               width: double.infinity,
                               height: 80,
-                              color: Colors.grey[200],
                               child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Row(
@@ -115,7 +151,7 @@ class HomeView extends StatelessWidget {
                                         "Lihat Semua",
                                         style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.green,
+                                          color: Colors.purpleAccent,
                                         ),
                                       ),
                                     )
@@ -168,7 +204,7 @@ class HomeView extends StatelessWidget {
                                         "Lihat Semua",
                                         style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.green,
+                                          color: Colors.purpleAccent,
                                         ),
                                       ),
                                     )
@@ -222,7 +258,7 @@ class HomeView extends StatelessWidget {
                                         "Lihat Semua",
                                         style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.green,
+                                          color: Colors.purpleAccent,
                                         ),
                                       ),
                                     )
@@ -270,7 +306,7 @@ class BeritaListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 290,
+      height: 250,
       child: ListView.builder(
         itemCount: beritaList.data?.length,
         scrollDirection: Axis.horizontal,
@@ -285,6 +321,7 @@ class BeritaListView extends StatelessWidget {
                     ]);
                   },
                   child: Card(
+                    elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -296,7 +333,7 @@ class BeritaListView extends StatelessWidget {
                           children: [
                             Container(
                               height: 150,
-                              width: 150,
+                              width: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.cyan,
@@ -311,11 +348,11 @@ class BeritaListView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
-                                width: 150,
-                                height: 100,
+                                width: 300,
+                                height: 50,
                                 child: Text(
                                   berita.title!,
-                                  overflow: TextOverflow.fade,
+                                  overflow: TextOverflow.clip,
                                   maxLines: 5,
                                   softWrap: true,
                                   style: const TextStyle(fontSize: 14),
@@ -345,7 +382,7 @@ class EventListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 250,
       child: ListView.builder(
         itemCount: eventList.data?.length,
         scrollDirection: Axis.horizontal,
@@ -360,18 +397,19 @@ class EventListView extends StatelessWidget {
                     ]);
                   },
                   child: Card(
+                    elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: IntrinsicHeight(
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               height: 150,
-                              width: 150,
+                              width: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.cyan,
@@ -386,11 +424,11 @@ class EventListView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
-                                width: 150,
-                                height: 100,
+                                width: 300,
+                                height: 50,
                                 child: Text(
                                   event.title!,
-                                  overflow: TextOverflow.fade,
+                                  overflow: TextOverflow.clip,
                                   maxLines: 5,
                                   softWrap: true,
                                   style: const TextStyle(fontSize: 14),

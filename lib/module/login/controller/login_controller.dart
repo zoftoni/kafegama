@@ -41,7 +41,7 @@ class LoginController extends GetxController {
         await SessionManager().set("USER", result.user).then((value) =>
             SessionManager()
                 .set("TOKEN", result.accessToken)
-                .then((value) => Get.back(result: 'success')));
+                .then((value) => Get.off(const MainView())));
       } catch (e) {
         Get.snackbar(
           "Error",

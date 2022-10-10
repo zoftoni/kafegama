@@ -26,7 +26,7 @@ class MainView extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: Container(
-            color: Colors.blueGrey,
+            color: Colors.purple,
             child: TabBar(
               indicatorColor: Colors.white,
               labelStyle: const TextStyle(fontSize: 12.0),

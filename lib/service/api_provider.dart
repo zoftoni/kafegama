@@ -13,8 +13,8 @@ import 'package:kafegama/model/login_response.dart';
 import 'app_interceptors.dart';
 
 class APIProvider {
-  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  // static const String _baseUrl = 'https://kafegamaa.com/api/';
+  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  static const String _baseUrl = 'https://kafegamaa.com/api/';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';

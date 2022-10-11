@@ -26,7 +26,7 @@ class UserProfileView extends StatelessWidget {
               iconTheme: const IconThemeData(
                 color: Colors.white,
               ),
-              title: const Text("User Menu"),
+              title: const Text("USER MENU"),
             ),
             body: SingleChildScrollView(
               child: Padding(

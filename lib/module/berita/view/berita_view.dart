@@ -25,61 +25,61 @@ class BeritaView extends StatelessWidget {
             ),
             title: const Text("BERITA"),
           ),
-          body: RefreshIndicator(
-            onRefresh: () => controller.handleRefresh(),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 6.0,
-                      horizontal: 12.0,
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 6.0,
+                    horizontal: 12.0,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(12.0),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                      border: Border.all(
-                        width: 1.0,
-                        color: Colors.grey[400]!,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(Icons.search),
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            initialValue: null,
-                            decoration: const InputDecoration.collapsed(
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              hintText: "Search",
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.sort,
-                              size: 20.0,
-                            ),
-                          ),
-                        ),
-                      ],
+                    border: Border.all(
+                      width: 1.0,
+                      color: Colors.grey[400]!,
                     ),
                   ),
+                  child: Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.search),
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          initialValue: null,
+                          decoration: const InputDecoration.collapsed(
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintText: "Search",
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.sort,
+                            size: 20.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Expanded(
-                  child: Obx(() {
-                    return LazyLoadScrollView(
-                      onEndOfPage: () => controller.getData(),
+              ),
+              Expanded(
+                child: Obx(() {
+                  return LazyLoadScrollView(
+                    onEndOfPage: () => controller.getData(),
+                    child: RefreshIndicator(
+                      onRefresh: () => controller.handleRefresh(),
                       child: ListView.builder(
                         itemCount: controller.beritaList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -139,11 +139,11 @@ class BeritaView extends StatelessWidget {
                           );
                         },
                       ),
-                    );
-                  }),
-                ),
-              ],
-            ),
+                    ),
+                  );
+                }),
+              ),
+            ],
           ),
         );
       },

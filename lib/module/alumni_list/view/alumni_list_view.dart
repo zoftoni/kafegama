@@ -77,47 +77,50 @@ class AlumniListView extends StatelessWidget {
               child: Obx(() {
                 return LazyLoadScrollView(
                   onEndOfPage: () => controller.getData(),
-                  child: ListView.builder(
-                      itemCount: controller.alumniList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var alumni = controller.alumniList.elementAt(index);
+                  child: RefreshIndicator(
+                    onRefresh: () => controller.handleRefresh(),
+                    child: ListView.builder(
+                        itemCount: controller.alumniList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var alumni = controller.alumniList.elementAt(index);
 
-                        return InkWell(
-                            onTap: () {
-                              Get.to(() => const AlumniDetailView(),
-                                  arguments: [
-                                    {"alumni": alumni}
-                                  ]);
-                            },
-                            child: Card(
-                              elevation: 5,
-                              child: alumni.photo != null
-                                  ? ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundColor: Colors.grey[200],
-                                        backgroundImage: NetworkImage(
-                                          alumni.photo!,
+                          return InkWell(
+                              onTap: () {
+                                Get.to(() => const AlumniDetailView(),
+                                    arguments: [
+                                      {"alumni": alumni}
+                                    ]);
+                              },
+                              child: Card(
+                                elevation: 5,
+                                child: alumni.photo != null
+                                    ? ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundColor: Colors.grey[200],
+                                          backgroundImage: NetworkImage(
+                                            alumni.photo!,
+                                          ),
                                         ),
-                                      ),
-                                      title: Text(alumni.nama!),
-                                      subtitle: Text(alumni.nis!),
-                                      trailing: Text(
-                                          alumni.angkatanTahun!.toString()),
-                                    )
-                                  : ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundColor: Colors.grey[200],
-                                        backgroundImage: const AssetImage(
-                                          "assets/image/kafegama.png",
+                                        title: Text(alumni.nama!),
+                                        subtitle: Text(alumni.nis!),
+                                        trailing: Text(
+                                            alumni.angkatanTahun!.toString()),
+                                      )
+                                    : ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundColor: Colors.grey[200],
+                                          backgroundImage: const AssetImage(
+                                            "assets/image/kafegama.png",
+                                          ),
                                         ),
+                                        title: Text(alumni.nama!),
+                                        subtitle: Text(alumni.nis!),
+                                        trailing: Text(
+                                            alumni.angkatanTahun!.toString()),
                                       ),
-                                      title: Text(alumni.nama!),
-                                      subtitle: Text(alumni.nis!),
-                                      trailing: Text(
-                                          alumni.angkatanTahun!.toString()),
-                                    ),
-                            ));
-                      }),
+                              ));
+                        }),
+                  ),
                 );
               }),
             ),

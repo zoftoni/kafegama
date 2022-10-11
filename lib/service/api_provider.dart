@@ -13,8 +13,8 @@ import 'package:kafegama/model/login_response.dart';
 import 'app_interceptors.dart';
 
 class APIProvider {
-  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  static const String _baseUrl = 'https://kafegamaa.com/api/';
+  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  // static const String _baseUrl = 'https://kafegamaa.com/api/';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';
@@ -101,13 +101,14 @@ class APIProvider {
   }
 
   Future<MessageResponse> register(
-      name, email, password, passwordConfirmation) async {
+      name, noHp, email, password, passwordConfirmation) async {
     try {
       _dio.options.connectTimeout = 30000; //30s
       _dio.options.receiveTimeout = 50000;
       // String url = _baseUrl + _LOGIN;
       Response response = await _dio.post(_REGISTER, data: {
         'name': name,
+        'no_hp': noHp,
         'email': email,
         'password': password,
         'password_confirmation': passwordConfirmation

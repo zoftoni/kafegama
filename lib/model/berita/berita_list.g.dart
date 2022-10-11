@@ -17,7 +17,7 @@ BeritaList _$BeritaListFromJson(Map<String, dynamic> json) => BeritaList(
           ? null
           : Meta.fromJson(json['meta'] as Map<String, dynamic>),
       error: json['error'] as String?,
-    );
+    )..responseCode = json['responseCode'] as int?;
 
 Map<String, dynamic> _$BeritaListToJson(BeritaList instance) =>
     <String, dynamic>{
@@ -25,4 +25,5 @@ Map<String, dynamic> _$BeritaListToJson(BeritaList instance) =>
       'links': instance.links,
       'meta': instance.meta,
       'error': instance.error,
+      'responseCode': instance.responseCode,
     };

@@ -20,6 +20,9 @@ class BursaKerjaController extends GetxController {
   }
 
   Future<void> handleRefresh() async {
+    page = 0;
+    bursaKerjaList.clear();
+    _bursaKerjaList.clear();
     getData();
   }
 

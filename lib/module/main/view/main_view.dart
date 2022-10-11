@@ -26,7 +26,7 @@ class MainView extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: Container(
-            color: Colors.purple,
+            color: const Color.fromRGBO(150, 47, 191, 1),
             child: TabBar(
               indicatorColor: Colors.white,
               labelStyle: const TextStyle(fontSize: 12.0),
@@ -51,7 +51,7 @@ class MainView extends StatelessWidget {
                   ),
                 ),
                 Tab(
-                  text: "Profil",
+                  text: "User",
                   icon: Icon(
                     Icons.person,
                   ),

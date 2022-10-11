@@ -9,6 +9,7 @@ class RegisterController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool obsecureText = true.obs;
   TextEditingController nameC = TextEditingController();
+  TextEditingController noHPC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController passC = TextEditingController();
   TextEditingController passConfirmationC = TextEditingController();
@@ -24,6 +25,7 @@ class RegisterController extends GetxController {
 
   Future<void> register() async {
     if (nameC.text.isNotEmpty &&
+        noHPC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
         passC.text.isNotEmpty &&
         passConfirmationC.text.isNotEmpty) {
@@ -31,8 +33,8 @@ class RegisterController extends GetxController {
       APIProvider apiProvider = Get.find();
 
       try {
-        final result = await apiProvider.register(
-            nameC.text, emailC.text, passC.text, passConfirmationC.text);
+        final result = await apiProvider.register(nameC.text, noHPC.text,
+            emailC.text, passC.text, passConfirmationC.text);
         if (result.error != null) {
           Get.snackbar(
             "Error",

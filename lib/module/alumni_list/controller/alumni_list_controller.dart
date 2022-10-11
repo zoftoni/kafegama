@@ -20,6 +20,9 @@ class AlumniListController extends GetxController {
   }
 
   Future<void> handleRefresh() async {
+    page = 0;
+    alumniList.clear();
+    _alumniList.clear();
     getData();
   }
 

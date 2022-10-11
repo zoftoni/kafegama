@@ -12,7 +12,6 @@ Alumni _$AlumniFromJson(Map<String, dynamic> json) => Alumni(
       idUser: json['id_user'],
       department: json['department'] as String?,
       degree: json['degree'] as String?,
-      graduationDate: json['graduation_date'] as String?,
       statusPekerjaan: json['status_pekerjaan'] as String?,
       namaPerusahaan: json['nama_perusahaan'] as String?,
       posisi: json['posisi'] as String?,
@@ -27,6 +26,9 @@ Alumni _$AlumniFromJson(Map<String, dynamic> json) => Alumni(
       sex: json['sex'] as String?,
       tempatLahir: json['tempat_lahir'] as String?,
       tglLahir: json['tgl_lahir'] as String?,
+      angkatanTahun: json['angkatan_tahun'] as int?,
+      lulusanTahun: json['lulusan_tahun'] as int?,
+      nis: json['nis'] as String?,
     );
 
 Map<String, dynamic> _$AlumniToJson(Alumni instance) => <String, dynamic>{
@@ -35,7 +37,6 @@ Map<String, dynamic> _$AlumniToJson(Alumni instance) => <String, dynamic>{
       'id_user': instance.idUser,
       'department': instance.department,
       'degree': instance.degree,
-      'graduation_date': instance.graduationDate,
       'status_pekerjaan': instance.statusPekerjaan,
       'nama_perusahaan': instance.namaPerusahaan,
       'posisi': instance.posisi,
@@ -50,4 +51,7 @@ Map<String, dynamic> _$AlumniToJson(Alumni instance) => <String, dynamic>{
       'sex': instance.sex,
       'tempat_lahir': instance.tempatLahir,
       'tgl_lahir': instance.tglLahir,
+      'angkatan_tahun': instance.angkatanTahun,
+      'lulusan_tahun': instance.lulusanTahun,
+      'nis': instance.nis,
     };

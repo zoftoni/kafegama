@@ -20,6 +20,9 @@ class DonasiCampaignController extends GetxController {
   }
 
   Future<void> handleRefresh() async {
+    page = 0;
+    donasiCampaignList.clear();
+    _donasiCampaignList.clear();
     getData();
   }
 

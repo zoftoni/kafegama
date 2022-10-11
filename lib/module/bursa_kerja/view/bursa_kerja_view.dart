@@ -77,63 +77,68 @@ class BursaKerjaView extends StatelessWidget {
                 child: Obx(() {
                   return LazyLoadScrollView(
                     onEndOfPage: () => controller.getData(),
-                    child: ListView.builder(
-                      itemCount: controller.bursaKerjaList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var bursaKerja =
-                            controller.bursaKerjaList.elementAt(index);
-                        return InkWell(
-                          onTap: () {
-                            Get.to(() => const BursaKerjaDetailView(),
-                                arguments: [
-                                  {"bursaKerja": bursaKerja}
-                                ]);
-                          },
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: IntrinsicHeight(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 150,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.cyan,
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            bursaKerja.picture!,
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SizedBox(
+                    child: RefreshIndicator(
+                      onRefresh: () => controller.handleRefresh(),
+                      child: ListView.builder(
+                        itemCount: controller.bursaKerjaList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var bursaKerja =
+                              controller.bursaKerjaList.elementAt(index);
+                          return InkWell(
+                            onTap: () {
+                              Get.to(() => const BursaKerjaDetailView(),
+                                  arguments: [
+                                    {"bursaKerja": bursaKerja}
+                                  ]);
+                            },
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: IntrinsicHeight(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 150,
                                         width: double.infinity,
-                                        height: 50,
-                                        child: Text(
-                                          bursaKerja.title!,
-                                          overflow: TextOverflow.fade,
-                                          maxLines: 5,
-                                          softWrap: true,
-                                          style: const TextStyle(fontSize: 14),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.cyan,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              bursaKerja.picture!,
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                    )
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 50,
+                                          child: Text(
+                                            bursaKerja.title!,
+                                            overflow: TextOverflow.fade,
+                                            maxLines: 5,
+                                            softWrap: true,
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   );
                 }),

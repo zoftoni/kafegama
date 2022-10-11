@@ -20,8 +20,9 @@ class BeritaController extends GetxController {
   }
 
   Future<void> handleRefresh() async {
-    beritaList.clear();
     page = 0;
+    beritaList.clear();
+    _beritaList.clear();
     getData();
   }
 

@@ -458,7 +458,7 @@ class DonasiCampaignListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 250,
       child: ListView.builder(
         itemCount: donasiCampaignList.data?.length,
         scrollDirection: Axis.horizontal,
@@ -473,6 +473,7 @@ class DonasiCampaignListView extends StatelessWidget {
                     ]);
                   },
                   child: Card(
+                    elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -484,7 +485,7 @@ class DonasiCampaignListView extends StatelessWidget {
                           children: [
                             Container(
                               height: 150,
-                              width: 150,
+                              width: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.cyan,
@@ -499,8 +500,8 @@ class DonasiCampaignListView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
-                                width: 150,
-                                height: 100,
+                                width: 300,
+                                height: 40,
                                 child: Text(
                                   donasiCampaign.title!,
                                   overflow: TextOverflow.fade,

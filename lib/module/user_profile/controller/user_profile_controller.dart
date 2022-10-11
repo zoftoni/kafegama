@@ -42,7 +42,8 @@ class UserProfileController extends GetxController {
           .remove("USER")
           .then((value) => SessionManager().remove("TOKEN").then((value) {
                 isLoading.value = false;
-                mainController.goToHome();
+                // mainController.goToHome();
+                Get.off(const LoginView());
               }));
     } catch (e) {
       isLoading.value = false;
@@ -53,5 +54,9 @@ class UserProfileController extends GetxController {
         backgroundColor: Colors.white,
       );
     }
+  }
+
+  openProfile() async {
+    print("clicked");
   }
 }

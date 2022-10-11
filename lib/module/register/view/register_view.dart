@@ -23,7 +23,7 @@ class RegisterView extends StatelessWidget {
             iconTheme: const IconThemeData(
               color: Colors.white,
             ),
-            title: const Text("Daftar"),
+            title: const Text("DAFTAR"),
           ),
           body: SizedBox(
             width: double.infinity,
@@ -45,7 +45,7 @@ class RegisterView extends StatelessWidget {
                                     Image.asset(
                                       "assets/image/bgregister.png",
                                       width: double.infinity,
-                                      height: 210.0,
+                                      height: 180.0,
                                       fit: BoxFit.cover,
                                     ),
                                     Column(
@@ -111,6 +111,23 @@ class RegisterView extends StatelessWidget {
                                       height: 20.0,
                                     ),
                                     TextFormField(
+                                      keyboardType: TextInputType.phone,
+                                      textInputAction: TextInputAction.next,
+                                      controller: controller.noHPC,
+                                      cursorColor: const Color(0xFF6F35A5),
+                                      onSaved: (noHP) {},
+                                      decoration: const InputDecoration(
+                                        hintText: "no hp",
+                                        prefixIcon: Padding(
+                                          padding: EdgeInsets.all(16.0),
+                                          child: Icon(Icons.phone_android),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    TextFormField(
                                       textInputAction: TextInputAction.done,
                                       controller: controller.passC,
                                       obscureText: true,
@@ -143,11 +160,17 @@ class RegisterView extends StatelessWidget {
                                     Hero(
                                       tag: "register_btn",
                                       child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          maximumSize:
+                                              const Size(double.infinity, 56),
+                                          minimumSize:
+                                              const Size(double.infinity, 56),
+                                        ),
                                         onPressed: () {
                                           controller.register();
                                         },
                                         child: Text(
-                                          "Register".toUpperCase(),
+                                          "Daftar".toUpperCase(),
                                         ),
                                       ),
                                     ),

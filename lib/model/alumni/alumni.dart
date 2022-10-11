@@ -11,8 +11,6 @@ class Alumni {
   dynamic idUser;
   String? department;
   String? degree;
-  @JsonKey(name: 'graduation_date')
-  String? graduationDate;
   @JsonKey(name: 'status_pekerjaan')
   String? statusPekerjaan;
   @JsonKey(name: 'nama_perusahaan')
@@ -36,29 +34,36 @@ class Alumni {
   String? tempatLahir;
   @JsonKey(name: 'tgl_lahir')
   String? tglLahir;
+  @JsonKey(name: 'angkatan_tahun')
+  int? angkatanTahun;
+  @JsonKey(name: 'lulusan_tahun')
+  int? lulusanTahun;
+  @JsonKey(name: 'nis')
+  String? nis;
 
-  Alumni({
-    this.idAlumni,
-    this.nama,
-    this.idUser,
-    this.department,
-    this.degree,
-    this.graduationDate,
-    this.statusPekerjaan,
-    this.namaPerusahaan,
-    this.posisi,
-    this.bidangUsahaPerusahaan,
-    this.kotaTempatKerja,
-    this.alamat,
-    this.email,
-    this.noHp,
-    this.createdAt,
-    this.updatedAt,
-    this.photo,
-    this.sex,
-    this.tempatLahir,
-    this.tglLahir,
-  });
+  Alumni(
+      {this.idAlumni,
+      this.nama,
+      this.idUser,
+      this.department,
+      this.degree,
+      this.statusPekerjaan,
+      this.namaPerusahaan,
+      this.posisi,
+      this.bidangUsahaPerusahaan,
+      this.kotaTempatKerja,
+      this.alamat,
+      this.email,
+      this.noHp,
+      this.createdAt,
+      this.updatedAt,
+      this.photo,
+      this.sex,
+      this.tempatLahir,
+      this.tglLahir,
+      this.angkatanTahun,
+      this.lulusanTahun,
+      this.nis});
 
   factory Alumni.fromJson(Map<String, dynamic> json) {
     return _$AlumniFromJson(json);

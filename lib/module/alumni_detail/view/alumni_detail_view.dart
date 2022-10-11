@@ -16,14 +16,13 @@ class AlumniDetailView extends StatelessWidget {
         var alumni = controller.alumni.value;
         const styleFieldName = TextStyle(
           fontSize: 12,
-          fontWeight: FontWeight.bold,
         );
         const styleFieldContent = TextStyle(
           fontSize: 18,
         );
 
         return Scaffold(
-          backgroundColor: Colors.grey[300],
+          backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0.0,
             flexibleSpace: const AppBarBG(),
@@ -56,10 +55,17 @@ class AlumniDetailView extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage: NetworkImage(alumni.photo!),
-                      ),
+                      alumni.photo != null
+                          ? CircleAvatar(
+                              radius: 30.0,
+                              backgroundImage: NetworkImage(alumni.photo!),
+                            )
+                          : const CircleAvatar(
+                              radius: 30.0,
+                              backgroundColor: Colors.white,
+                              backgroundImage:
+                                  AssetImage("assets/image/kafegama.png"),
+                            ),
                       const SizedBox(
                         width: 8.0,
                       ),
@@ -91,8 +97,8 @@ class AlumniDetailView extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Angkatan",
                             style: TextStyle(
                               color: Colors.white,
@@ -100,8 +106,8 @@ class AlumniDetailView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "1995",
-                            style: TextStyle(
+                            alumni.angkatanTahun!.toString(),
+                            style: const TextStyle(
                               fontSize: 16.0,
                               color: Colors.white,
                             ),
@@ -117,134 +123,169 @@ class AlumniDetailView extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Jenis Kelamin",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.sex!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Alamat",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.alamat!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Email",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.email!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "No HP",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.noHp!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Department",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.department!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Degree",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.degree!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Graduation Date",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.graduationDate!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Status Pekerjaan",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.statusPekerjaan!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Nama Perusahaan",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.namaPerusahaan!,
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Bidang Usaha Perusahaan",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.bidangUsahaPerusahaan ?? "",
-                              style: styleFieldContent,
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            const Text(
-                              "Kota Perusahaan",
-                              style: styleFieldName,
-                            ),
-                            SelectableText(
-                              alumni.kotaTempatKerja!,
-                              style: styleFieldContent,
-                            ),
-                          ],
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Jenis Kelamin",
+                          style: styleFieldName,
                         ),
-                      ),
+                        alumni.sex != null
+                            ? SelectableText(
+                                alumni.sex!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Alamat",
+                          style: styleFieldName,
+                        ),
+                        alumni.alamat != null
+                            ? SelectableText(
+                                alumni.alamat!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Email",
+                          style: styleFieldName,
+                        ),
+                        alumni.email != null
+                            ? SelectableText(
+                                alumni.email!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "No HP",
+                          style: styleFieldName,
+                        ),
+                        alumni.noHp != null
+                            ? SelectableText(
+                                alumni.noHp!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Department",
+                          style: styleFieldName,
+                        ),
+                        alumni.department != null
+                            ? SelectableText(
+                                alumni.department!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Degree",
+                          style: styleFieldName,
+                        ),
+                        alumni.degree != null
+                            ? SelectableText(
+                                alumni.degree!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Lulusan Tahun",
+                          style: styleFieldName,
+                        ),
+                        SelectableText(
+                          alumni.lulusanTahun!.toString(),
+                          style: styleFieldContent,
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Status Pekerjaan",
+                          style: styleFieldName,
+                        ),
+                        alumni.statusPekerjaan != null
+                            ? SelectableText(
+                                alumni.statusPekerjaan!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Nama Perusahaan",
+                          style: styleFieldName,
+                        ),
+                        alumni.namaPerusahaan != null
+                            ? SelectableText(
+                                alumni.namaPerusahaan!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Bidang Usaha Perusahaan",
+                          style: styleFieldName,
+                        ),
+                        alumni.bidangUsahaPerusahaan != null
+                            ? SelectableText(
+                                alumni.bidangUsahaPerusahaan ?? "",
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        const Text(
+                          "Kota Perusahaan",
+                          style: styleFieldName,
+                        ),
+                        alumni.kotaTempatKerja != null
+                            ? SelectableText(
+                                alumni.kotaTempatKerja!,
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 1.0,
+                              ),
+                      ],
                     ),
                   ),
                 ),

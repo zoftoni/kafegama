@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kafegama/module/main/controller/main_controller.dart';
+import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 import '../controller/user_profile_controller.dart';
 
 import 'package:get/get.dart';
@@ -12,156 +13,141 @@ class UserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserProfileController>(
-      init: UserProfileController(mainController),
-      builder: (controller) {
-        controller.view = this;
+        init: UserProfileController(mainController),
+        builder: (controller) {
+          controller.view = this;
 
-        /*
-        ------------------------
-        https://capekngoding.com
-        ------------------------
-        Starring:
-        Name: Dicky Darmawan
-        Github: https://github.com/Dicky019
-        ------------------------
-        -
-        ------------------------
-        Code generation with snippets can be a good solution for you or it can kill you.
-        A basic understanding of Dart and Flutter is required.
-        Keep it in mind, Our snippet can't generate many files yet.
-        So, all of our snippets are put in one file which is not best practice.
-        You need to do the optimization yourself, and at least you are familiar with using Flutter.
-        ------------------------
-        */
-
-        return Scaffold(
-          backgroundColor: const Color(0xffF3F5F9),
-          appBar: AppBar(
-            elevation: 0.0,
+          return Scaffold(
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
-              color: Colors.grey[900],
-            ),
-            titleTextStyle: TextStyle(
-              color: Colors.grey[900],
-            ),
-            title: const Text("Profile"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  controller.logout();
-                },
-                icon: const Icon(
-                  Icons.logout,
-                  size: 24.0,
-                  color: Colors.red,
-                ),
+            appBar: AppBar(
+              elevation: 0.0,
+              flexibleSpace: const AppBarBG(),
+              centerTitle: true,
+              iconTheme: const IconThemeData(
+                color: Colors.white,
               ),
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 12.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(124 / 2),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
-                            blurRadius: 24,
-                            offset: const Offset(0, 8),
-                            spreadRadius: 8)
-                      ],
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        radius: 42.0,
-                        backgroundImage: NetworkImage(
-                          "https://i.ibb.co/tXncffL/photo-1487017159836-4e23ece2e4cf-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg",
+              title: const Text("User Menu"),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12.0),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x19000000),
+                            blurRadius: 24,
+                            offset: Offset(0, 11),
+                          ),
+                        ],
+                      ),
+                      margin: const EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                controller.openProfile();
+                              },
+                              child: MenuItem(Icons.person, "Profil", "")),
+                          InkWell(
+                              onTap: () {
+                                controller.openProfile();
+                              },
+                              child:
+                                  MenuItem(Icons.list_alt, "Edit Profil", "")),
+                          InkWell(
+                              onTap: () {
+                                controller.openProfile();
+                              },
+                              child: MenuItem(
+                                  Icons.card_membership, "Membership", "GOLD")),
+                          InkWell(
+                              onTap: () {
+                                controller.openProfile();
+                              },
+                              child:
+                                  MenuItem(Icons.list, "Riwayat Donasi", "")),
+                          InkWell(
+                              onTap: () {
+                                controller.openProfile();
+                              },
+                              child: MenuItem(
+                                  Icons.question_answer_outlined, "FAQ", "")),
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Text(
-                    'Marjorie Hawkins',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(
+                      height: 30.0,
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: 16.0,
-                      bottom: 16.0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Card(
-                          color: Color(0xff34C759),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: 12.0,
-                              right: 12.0,
-                              top: 4.0,
-                              bottom: 4.0,
-                            ),
-                            child: Text(
-                              "Class: 7B",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
+                    InkWell(
+                      onTap: () => controller.logout(),
+                      child: const Text(
+                        "LOGOUT",
+                        style: TextStyle(
+                          color: Color.fromRGBO(150, 47, 191, 1),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Card(
-                          color: Color(0xffAF52DE),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: 12.0,
-                              right: 12.0,
-                              top: 4.0,
-                              bottom: 4.0,
-                            ),
-                            child: Text(
-                              "Profile: Maths, Physics",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
+}
+
+// ignore: non_constant_identifier_names
+Widget MenuItem(var settingIcon, var heading, var subheading) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromRGBO(150, 47, 191, 1),
+              ),
+              width: 45,
+              height: 45,
+              padding: const EdgeInsets.all(4),
+              child: Icon(settingIcon, color: Colors.white),
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  heading,
+                ),
+                subheading != ""
+                    ? Text(
+                        subheading,
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                      )
+                    : const SizedBox(
+                        height: 1.0,
+                      ),
+              ],
+            ),
+          ],
+        ),
+        const Icon(Icons.keyboard_arrow_right, color: Colors.purpleAccent)
+      ],
+    ),
+  );
 }

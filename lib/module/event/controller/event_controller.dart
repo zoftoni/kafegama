@@ -20,6 +20,9 @@ class EventController extends GetxController {
   }
 
   Future<void> handleRefresh() async {
+    page = 0;
+    eventList.clear();
+    _eventList.clear();
     getData();
   }
 

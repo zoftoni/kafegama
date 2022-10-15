@@ -137,7 +137,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -152,7 +152,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -167,7 +167,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -182,7 +182,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -197,7 +197,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -212,7 +212,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -238,7 +238,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -253,7 +253,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -268,7 +268,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                         const SizedBox(
                           height: 10.0,
@@ -283,7 +283,7 @@ class AlumniDetailView extends StatelessWidget {
                                 style: styleFieldContent,
                               )
                             : const SizedBox(
-                                height: 1.0,
+                                height: 10.0,
                               ),
                       ],
                     ),

@@ -325,42 +325,40 @@ class BeritaListView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 150,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.cyan,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    berita.picture!,
-                                  ),
-                                  fit: BoxFit.cover,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 300,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  berita.picture!,
                                 ),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 300,
-                                height: 50,
-                                child: Text(
-                                  berita.title!,
-                                  overflow: TextOverflow.clip,
-                                  maxLines: 5,
-                                  softWrap: true,
-                                  style: const TextStyle(fontSize: 14),
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 300,
+                              height: 50,
+                              child: Text(
+                                berita.title!,
+                                overflow: TextOverflow.clip,
+                                maxLines: 5,
+                                softWrap: true,
+                                style: const TextStyle(fontSize: 14),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -401,42 +399,40 @@ class EventListView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 150,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.cyan,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    event.picture!,
-                                  ),
-                                  fit: BoxFit.cover,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 150,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  event.picture!,
                                 ),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 300,
-                                height: 50,
-                                child: Text(
-                                  event.title!,
-                                  overflow: TextOverflow.clip,
-                                  maxLines: 5,
-                                  softWrap: true,
-                                  style: const TextStyle(fontSize: 14),
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 300,
+                              height: 50,
+                              child: Text(
+                                event.title!,
+                                overflow: TextOverflow.clip,
+                                maxLines: 5,
+                                softWrap: true,
+                                style: const TextStyle(fontSize: 14),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -477,42 +473,40 @@ class DonasiCampaignListView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 150,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.cyan,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    donasiCampaign.picture!,
-                                  ),
-                                  fit: BoxFit.cover,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 150,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  donasiCampaign.picture!,
                                 ),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: 300,
-                                height: 40,
-                                child: Text(
-                                  donasiCampaign.title!,
-                                  overflow: TextOverflow.fade,
-                                  maxLines: 5,
-                                  softWrap: true,
-                                  style: const TextStyle(fontSize: 14),
-                                ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 300,
+                              height: 40,
+                              child: Text(
+                                donasiCampaign.title!,
+                                overflow: TextOverflow.fade,
+                                maxLines: 5,
+                                softWrap: true,
+                                style: const TextStyle(fontSize: 14),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),

@@ -107,7 +107,7 @@ class BursaKerjaView extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: Colors.cyan,
+                                          color: Colors.white,
                                           image: DecorationImage(
                                             image: NetworkImage(
                                               bursaKerja.picture!,

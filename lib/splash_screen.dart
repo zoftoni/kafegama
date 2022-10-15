@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: 'assets/image/kafegama.png',
-      nextScreen: const MainView(),
+      nextScreen: const LoginView(),
       splashTransition: SplashTransition.scaleTransition,
       pageTransitionType: PageTransitionType.fade,
       splashIconSize: 200,

@@ -29,7 +29,8 @@ class MainView extends StatelessWidget {
             color: const Color.fromRGBO(150, 47, 191, 1),
             child: TabBar(
               indicatorColor: Colors.white,
-              labelStyle: const TextStyle(fontSize: 12.0),
+              indicatorSize: TabBarIndicatorSize.label,
+              labelStyle: const TextStyle(fontSize: 10.0),
               controller: controller.tabController,
               tabs: const [
                 Tab(

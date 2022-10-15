@@ -19,8 +19,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getData();
+    super.onInit();
   }
 
   Future<void> getData() async {
@@ -32,6 +32,9 @@ class HomeController extends GetxController {
               else
                 {user.value = User()}
             });
+      } else {
+        Get.off(() => const LoginView());
+        return;
       }
     });
 

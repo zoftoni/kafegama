@@ -15,7 +15,8 @@ DonasiCampaign _$DonasiCampaignFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      dateEnd: json['date_end'],
+      startDate: json['start_date'],
+      endDate: json['end_date'],
       total: json['total'],
       target: json['target'] as String?,
     );
@@ -29,7 +30,8 @@ Map<String, dynamic> _$DonasiCampaignToJson(DonasiCampaign instance) =>
       'text': instance.text,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'date_end': instance.dateEnd,
+      'start_date': instance.startDate,
+      'end_date': instance.endDate,
       'total': instance.total,
       'target': instance.target,
     };

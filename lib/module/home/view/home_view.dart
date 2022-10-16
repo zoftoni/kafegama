@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/model/berita/berita_list.dart';
-import 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
-import 'package:kafegama/model/event/event_list.dart';
-import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);

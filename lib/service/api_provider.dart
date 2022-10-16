@@ -2,19 +2,13 @@
 
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:kafegama/model/alumni/alumni_list.dart';
-import 'package:kafegama/model/berita/berita_list.dart';
-import 'package:kafegama/model/bursa_kerja/bursa_kerja_list.dart';
-import 'package:kafegama/model/common/message_response.dart';
-import 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
-import 'package:kafegama/model/event/event_list.dart';
-import 'package:kafegama/model/login_response.dart';
-
-import 'app_interceptors.dart';
+import 'package:get/get.dart' as getx;
+import 'package:kafegama/core.dart';
+import 'package:kafegama/model/user_profile/user_profile.dart';
 
 class APIProvider {
-  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  static const String _baseUrl = 'https://kafegamaa.com/api/';
+  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  // static const String _baseUrl = 'https://kafegamaa.com/api/';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';
@@ -24,6 +18,7 @@ class APIProvider {
   static const String _DONASI_CAMPAIGN = 'donasi-campaign';
   static const String _BURSA_KERJA = 'bursa-kerja';
   static const String _ALUMNI = 'alumni';
+  static const String _USER_PROFILE = 'user-profile';
 
   final Dio _dio = Dio();
 
@@ -65,6 +60,9 @@ class APIProvider {
           errorDescription = "Receive timeout in connection with API server";
           break;
         case DioErrorType.response:
+          if (dioError.response?.statusCode == 401) {
+            getx.Get.off(const LoginView());
+          }
           // errorDescription = dioError.response?.data["error"];
           errorDescription =
               "Received invalid status code: ${dioError.response?.statusCode} ${dioError.response?.statusMessage}"
@@ -272,5 +270,21 @@ class APIProvider {
           _handleError(e), e.response != null ? e.response!.statusCode! : 500);
     }
   }
+
   //////////////////////
+  ///
+  ///
+  Future<UserProfile> getUserProfileData() async {
+    try {
+      Response response = await _dio.get(_USER_PROFILE,
+          options: Options(
+              headers: {"requiresToken": true, "Accept": "application/json"}));
+      return UserProfile.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return UserProfile.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
+    }
+  }
 }

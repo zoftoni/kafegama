@@ -57,6 +57,10 @@ class UserProfileController extends GetxController {
   }
 
   openProfile() async {
-    print("clicked");
+    Get.to(() => const ProfilView());
+  }
+
+  openEditProfile() async {
+    Get.to(() => const EditProfilView());
   }
 }

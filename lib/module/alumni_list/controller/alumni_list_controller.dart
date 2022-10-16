@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/model/alumni/alumni.dart';
-import 'package:kafegama/model/alumni/alumni_list.dart';
-import 'package:kafegama/service/api_provider.dart';
 
 class AlumniListController extends GetxController {
   AlumniListView? view;

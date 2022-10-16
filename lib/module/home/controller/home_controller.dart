@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/model/berita/berita_list.dart';
-import 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
-import 'package:kafegama/model/event/event_list.dart';
-import 'package:kafegama/model/user.dart';
-import 'package:kafegama/service/api_provider.dart';
 
 class HomeController extends GetxController {
   HomeView? view;

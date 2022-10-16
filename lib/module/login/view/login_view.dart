@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kafegama/core.dart';
 
 import 'package:get/get.dart';
-import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);

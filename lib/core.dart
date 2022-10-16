@@ -1,3 +1,23 @@
+/*
+We believe, the class name must be unique. 
+If there is a conflicting class name in this file,
+it means you have to rename it to something more unique.
+*/
+export 'package:kafegama/model/alumni/alumni.dart';
+export 'package:kafegama/model/alumni/alumni_list.dart';
+export 'package:kafegama/model/berita/berita.dart';
+export 'package:kafegama/model/berita/berita_list.dart';
+export 'package:kafegama/model/bursa_kerja/bursa_kerja.dart';
+export 'package:kafegama/model/bursa_kerja/bursa_kerja_list.dart';
+export 'package:kafegama/model/common/links.dart';
+export 'package:kafegama/model/common/message_response.dart';
+export 'package:kafegama/model/common/meta.dart';
+export 'package:kafegama/model/donasi_campaign/donasi_campaign.dart';
+export 'package:kafegama/model/donasi_campaign/donasi_campaign_list.dart';
+export 'package:kafegama/model/event/event.dart';
+export 'package:kafegama/model/event/event_list.dart';
+export 'package:kafegama/model/login_response.dart';
+export 'package:kafegama/model/user.dart';
 export 'package:kafegama/module/alumni_detail/controller/alumni_detail_controller.dart';
 export 'package:kafegama/module/alumni_detail/view/alumni_detail_view.dart';
 export 'package:kafegama/module/alumni_list/controller/alumni_list_controller.dart';
@@ -16,6 +36,8 @@ export 'package:kafegama/module/donasi_campaign_detail/controller/donasi_campaig
 export 'package:kafegama/module/donasi_campaign_detail/view/donasi_campaign_detail_view.dart';
 export 'package:kafegama/module/donasi_history/controller/donasi_history_controller.dart';
 export 'package:kafegama/module/donasi_history/view/donasi_history_view.dart';
+export 'package:kafegama/module/edit_profil/controller/edit_profil_controller.dart';
+export 'package:kafegama/module/edit_profil/view/edit_profil_view.dart';
 export 'package:kafegama/module/event/controller/event_controller.dart';
 export 'package:kafegama/module/event/view/event_view.dart';
 export 'package:kafegama/module/event_detail/controller/event_detail_controller.dart';
@@ -26,15 +48,24 @@ export 'package:kafegama/module/forgot_password/controller/forgot_password_contr
 export 'package:kafegama/module/forgot_password/view/forgot_password_view.dart';
 export 'package:kafegama/module/home/controller/home_controller.dart';
 export 'package:kafegama/module/home/view/home_view.dart';
-export 'package:kafegama/module/iuran_history/controller/iuran_history_controller.dart';
-export 'package:kafegama/module/iuran_history/view/iuran_history_view.dart';
+
 export 'package:kafegama/module/login/controller/login_controller.dart';
 export 'package:kafegama/module/login/view/login_view.dart';
 export 'package:kafegama/module/main/controller/main_controller.dart';
 export 'package:kafegama/module/main/view/main_view.dart';
+export 'package:kafegama/module/membership/controller/membership_controller.dart';
+export 'package:kafegama/module/membership/view/membership_view.dart';
+export 'package:kafegama/module/profil/controller/profil_controller.dart';
+export 'package:kafegama/module/profil/view/profil_view.dart';
 export 'package:kafegama/module/register/controller/register_controller.dart';
 export 'package:kafegama/module/register/view/register_view.dart';
 export 'package:kafegama/module/sandbox/controller/sandbox_controller.dart';
 export 'package:kafegama/module/sandbox/view/sandbox_view.dart';
 export 'package:kafegama/module/user_profile/controller/user_profile_controller.dart';
 export 'package:kafegama/module/user_profile/view/user_profile_view.dart';
+export 'package:kafegama/service/api_provider.dart';
+export 'package:kafegama/service/app_interceptors.dart';
+export 'package:kafegama/shared/util/focus_helper/focus_helper.dart';
+export 'package:kafegama/shared/util/theme/appbar_bg.dart';
+export 'package:kafegama/shared/util/theme/theme.dart';
+export 'package:kafegama/shared/util/theme/theme_constants.dart';

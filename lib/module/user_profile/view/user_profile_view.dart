@@ -58,7 +58,7 @@ class UserProfileView extends StatelessWidget {
                               child: MenuItem(Icons.person, "Profil", "")),
                           InkWell(
                               onTap: () {
-                                controller.openProfile();
+                                controller.openEditProfile();
                               },
                               child:
                                   MenuItem(Icons.list_alt, "Edit Profil", "")),

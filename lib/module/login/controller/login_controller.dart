@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/service/api_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginController extends GetxController {

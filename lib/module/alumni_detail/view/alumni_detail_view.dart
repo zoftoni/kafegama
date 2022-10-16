@@ -81,13 +81,17 @@ class AlumniDetailView extends StatelessWidget {
                                 fontSize: 10.0,
                               ),
                             ),
-                            Text(
-                              alumni.nama!,
-                              style: const TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                              ),
-                            ),
+                            alumni.nama != null
+                                ? Text(
+                                    alumni.nama!,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const SizedBox(
+                                    height: 10.0,
+                                  ),
                           ],
                         ),
                       ),
@@ -105,13 +109,17 @@ class AlumniDetailView extends StatelessWidget {
                               fontSize: 10.0,
                             ),
                           ),
-                          Text(
-                            alumni.angkatanTahun!.toString(),
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                              color: Colors.white,
-                            ),
-                          ),
+                          alumni.angkatanTahun != null
+                              ? Text(
+                                  alumni.angkatanTahun!.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const SizedBox(
+                                  height: 10.0,
+                                ),
                         ],
                       ),
                     ],
@@ -221,10 +229,14 @@ class AlumniDetailView extends StatelessWidget {
                           "Lulusan Tahun",
                           style: styleFieldName,
                         ),
-                        SelectableText(
-                          alumni.lulusanTahun!.toString(),
-                          style: styleFieldContent,
-                        ),
+                        alumni.lulusanTahun != null
+                            ? SelectableText(
+                                alumni.lulusanTahun!.toString(),
+                                style: styleFieldContent,
+                              )
+                            : const SizedBox(
+                                height: 10.0,
+                              ),
                         const SizedBox(
                           height: 10.0,
                         ),

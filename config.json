@@ -14,12 +14,14 @@
     "alumni_list",
     "alumni_detail",
     "user_profile",
-    "iuran_history",
     "donasi_history",
     "faq",
     "main",
     "login",
     "register",
-    "forgot_password"
+    "forgot_password",
+    "profil",
+    "edit_profil",
+    "membership"
   ]
 }

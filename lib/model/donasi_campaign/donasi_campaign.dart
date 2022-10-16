@@ -14,8 +14,10 @@ class DonasiCampaign {
   String? createdAt;
   @JsonKey(name: 'updated_at')
   String? updatedAt;
-  @JsonKey(name: 'date_end')
-  dynamic dateEnd;
+  @JsonKey(name: 'start_date')
+  dynamic startDate;
+  @JsonKey(name: 'end_date')
+  dynamic endDate;
   dynamic total;
   String? target;
 
@@ -27,7 +29,8 @@ class DonasiCampaign {
     this.text,
     this.createdAt,
     this.updatedAt,
-    this.dateEnd,
+    this.startDate,
+    this.endDate,
     this.total,
     this.target,
   });

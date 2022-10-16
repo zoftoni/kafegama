@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/shared/util/theme/appbar_bg.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import 'package:get/get.dart';

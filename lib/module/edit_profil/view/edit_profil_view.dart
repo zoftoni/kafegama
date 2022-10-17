@@ -154,9 +154,9 @@ class EditProfilView extends StatelessWidget {
                         Container(
                             padding: const EdgeInsets.all(12),
                             margin: const EdgeInsets.only(),
-                            child: DateTimeFormField(
+                            child: DateTimeField(
                               initialDate: DateTime.now(),
-                              initialValue: controller.tglLahir,
+                              selectedDate: controller.tglLahir,
                               decoration: const InputDecoration(
                                 fillColor: Colors.white,
                                 hintStyle: TextStyle(color: Colors.black45),
@@ -166,9 +166,8 @@ class EditProfilView extends StatelessWidget {
                                 labelText: 'Tanggal Lahir',
                               ),
                               mode: DateTimeFieldPickerMode.date,
-                              autovalidateMode: AutovalidateMode.always,
                               onDateSelected: (DateTime value) {
-                                print(value);
+                                controller.tglLahir = value;
                               },
                             )),
                         Container(
@@ -266,7 +265,7 @@ class EditProfilView extends StatelessWidget {
                                 groupValue: controller.statusPekerjaan,
                                 dense: true,
                                 onChanged: (value) {
-                                  controller.jenisKelamin = value.toString();
+                                  controller.statusPekerjaan = value.toString();
                                 }),
                             RadioListTile(
                                 title: const Text("Sudah Bekerja"),
@@ -274,7 +273,7 @@ class EditProfilView extends StatelessWidget {
                                 dense: true,
                                 groupValue: controller.statusPekerjaan,
                                 onChanged: (value) {
-                                  controller.jenisKelamin = value.toString();
+                                  controller.statusPekerjaan = value.toString();
                                 }),
                             RadioListTile(
                                 title: const Text("Wiraswasta"),
@@ -282,7 +281,7 @@ class EditProfilView extends StatelessWidget {
                                 dense: true,
                                 groupValue: controller.statusPekerjaan,
                                 onChanged: (value) {
-                                  controller.jenisKelamin = value.toString();
+                                  controller.statusPekerjaan = value.toString();
                                 }),
                             RadioListTile(
                                 title: const Text("Lanjut Studi"),
@@ -290,7 +289,7 @@ class EditProfilView extends StatelessWidget {
                                 dense: true,
                                 groupValue: controller.statusPekerjaan,
                                 onChanged: (value) {
-                                  controller.jenisKelamin = value.toString();
+                                  controller.statusPekerjaan = value.toString();
                                 }),
                             const SizedBox(
                               height: 10.0,
@@ -380,7 +379,7 @@ class EditProfilView extends StatelessWidget {
                       minimumSize: const Size(double.infinity, 56),
                     ),
                     onPressed: () {
-                      // controller.login();
+                      controller.save();
                     },
                     child: Text(
                       "Submit".toUpperCase(),

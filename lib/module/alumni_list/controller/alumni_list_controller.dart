@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
 
@@ -9,11 +10,33 @@ class AlumniListController extends GetxController {
   List<Alumni> get alumniList => _alumniList.toList();
   int page = 0;
   String keyword = "";
+  final user = User().obs;
 
   @override
   void onInit() {
     super.onInit();
-    getData();
+
+    SessionManager().get("USER").then((value) {
+      if (value != null) {
+        user.value = User.fromJson(value);
+        if (user.value.nim == null) {
+          Get.defaultDialog(
+              title: "Blocked",
+              middleText: "Silahkan Verifikasi NIM untuk membuka menu ini",
+              backgroundColor: Colors.white,
+              textConfirm: "OK",
+              radius: 6,
+              onConfirm: () {
+                Get.back();
+              });
+          return;
+        } else {
+          getData();
+        }
+      } else {
+        Get.off(() => const LoginView());
+      }
+    });
   }
 
   Future<void> handleRefresh() async {

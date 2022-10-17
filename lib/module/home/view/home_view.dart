@@ -90,28 +90,55 @@ class HomeView extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const CircleAvatar(
-                                      radius: 25,
-                                      backgroundImage: NetworkImage(
-                                        'https://i.ibb.co/PGv8ZzG/me.jpg',
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Hi," + user.name!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .caption!
-                                                .copyWith(fontSize: 14),
+                                    Row(
+                                      children: [
+                                        user.photo != null
+                                            ? CircleAvatar(
+                                                radius: 30.0,
+                                                backgroundImage:
+                                                    NetworkImage(user.photo!),
+                                              )
+                                            : const CircleAvatar(
+                                                radius: 30.0,
+                                                backgroundColor: Colors.white,
+                                                backgroundImage: AssetImage(
+                                                    "assets/image/kafegama.png"),
+                                              ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                user.name!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .caption!
+                                                    .copyWith(fontSize: 14),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      child: user.nim == null
+                                          ? ElevatedButton(
+                                              onPressed: () {
+                                                Get.delete<HomeController>();
+                                                Get.to(
+                                                    () => const VerifNimView());
+                                              },
+                                              child:
+                                                  const Text("Verifikasi NIM"),
+                                            )
+                                          : const SizedBox(
+                                              height: 10.0,
+                                            ),
                                     ),
                                   ],
                                 ),

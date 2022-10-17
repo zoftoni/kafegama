@@ -4,7 +4,6 @@ import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 import 'package:kafegama/core.dart';
-import 'package:kafegama/model/user_profile/user_profile.dart';
 
 class APIProvider {
   static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
@@ -19,6 +18,9 @@ class APIProvider {
   static const String _BURSA_KERJA = 'bursa-kerja';
   static const String _ALUMNI = 'alumni';
   static const String _USER_PROFILE = 'user-profile';
+  static const String _EDIT_PROFILE = 'edit-profile';
+  static const String _VERIFIKASI_NIM = 'verifikasi-nim';
+  static const String _REFRESH_USER = 'refresh-user';
 
   final Dio _dio = Dio();
 
@@ -285,6 +287,76 @@ class APIProvider {
       // print("Exception occured: $error stackTrace: $stacktrace");
       return UserProfile.withError(
           _handleError(e), e.response != null ? e.response!.statusCode! : 500);
+    }
+  }
+
+  Future<MessageResponse> editProfile(
+      photo,
+      jenisKelamin,
+      tempatLahir,
+      tglLahir,
+      alamat,
+      department,
+      degree,
+      statusPekerjaan,
+      namaPerusahaan,
+      jabatan,
+      bidangUsaha,
+      kotaPerusahaan) async {
+    var formData = FormData.fromMap({
+      'photo': photo.path != ""
+          ? await MultipartFile.fromFile(photo.path, filename: "photo")
+          : "",
+      'sex': jenisKelamin,
+      'tempat_lahir': tempatLahir,
+      'tgl_lahir': tglLahir,
+      'alamat': alamat,
+      'department': department,
+      'degree': degree,
+      'status_pekerjaan': statusPekerjaan,
+      'nama_perusahaan': namaPerusahaan,
+      'posisi': jabatan,
+      'bidang_usaha_perusahaan': bidangUsaha,
+      'kota_tempat_kerja': kotaPerusahaan,
+    });
+    try {
+      Response response = await _dio.post(_EDIT_PROFILE,
+          data: formData, options: Options(headers: {"requiresToken": true}));
+      // throwIfNoSuccess(response);
+      return MessageResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return MessageResponse.withError(_handleError(e));
+    }
+  }
+
+  Future<MessageResponse> verifikasiNIM(
+      nim, angkatanTahun, lulusanTahun) async {
+    var formData = FormData.fromMap({
+      'nim': nim,
+      'angkatan_tahun': angkatanTahun,
+      'lulusan_tahun': lulusanTahun,
+    });
+    try {
+      Response response = await _dio.post(_VERIFIKASI_NIM,
+          data: formData, options: Options(headers: {"requiresToken": true}));
+      // throwIfNoSuccess(response);
+      return MessageResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return MessageResponse.withError(_handleError(e));
+    }
+  }
+
+  Future<LoginResponse> refreshUser() async {
+    try {
+      Response response = await _dio.get(_REFRESH_USER,
+          options: Options(headers: {"requiresToken": true}));
+      // throwIfNoSuccess(response);
+      return LoginResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return LoginResponse.withError(_handleError(e));
     }
   }
 }

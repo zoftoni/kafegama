@@ -18,6 +18,7 @@ export 'package:kafegama/model/event/event.dart';
 export 'package:kafegama/model/event/event_list.dart';
 export 'package:kafegama/model/login_response.dart';
 export 'package:kafegama/model/user.dart';
+export 'package:kafegama/model/user_profile/user_profile.dart';
 export 'package:kafegama/module/alumni_detail/controller/alumni_detail_controller.dart';
 export 'package:kafegama/module/alumni_detail/view/alumni_detail_view.dart';
 export 'package:kafegama/module/alumni_list/controller/alumni_list_controller.dart';
@@ -48,7 +49,6 @@ export 'package:kafegama/module/forgot_password/controller/forgot_password_contr
 export 'package:kafegama/module/forgot_password/view/forgot_password_view.dart';
 export 'package:kafegama/module/home/controller/home_controller.dart';
 export 'package:kafegama/module/home/view/home_view.dart';
-
 export 'package:kafegama/module/login/controller/login_controller.dart';
 export 'package:kafegama/module/login/view/login_view.dart';
 export 'package:kafegama/module/main/controller/main_controller.dart';
@@ -63,6 +63,8 @@ export 'package:kafegama/module/sandbox/controller/sandbox_controller.dart';
 export 'package:kafegama/module/sandbox/view/sandbox_view.dart';
 export 'package:kafegama/module/user_profile/controller/user_profile_controller.dart';
 export 'package:kafegama/module/user_profile/view/user_profile_view.dart';
+export 'package:kafegama/module/verif_nim/controller/verif_nim_controller.dart';
+export 'package:kafegama/module/verif_nim/view/verif_nim_view.dart';
 export 'package:kafegama/service/api_provider.dart';
 export 'package:kafegama/service/app_interceptors.dart';
 export 'package:kafegama/shared/util/focus_helper/focus_helper.dart';

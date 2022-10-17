@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kafegama/module/main/controller/main_controller.dart';
-import 'package:kafegama/shared/util/theme/appbar_bg.dart';
-import '../controller/user_profile_controller.dart';
+import 'package:kafegama/core.dart';
 
 import 'package:get/get.dart';
 
@@ -30,76 +28,95 @@ class UserProfileView extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0x19000000),
-                            blurRadius: 24,
-                            offset: Offset(0, 11),
+                  padding: const EdgeInsets.all(30.0),
+                  child: Obx(() {
+                    var user = controller.user.value;
+                    return Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12.0),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x19000000),
+                                blurRadius: 24,
+                                offset: Offset(0, 11),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      margin: const EdgeInsets.only(bottom: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                              onTap: () {
-                                controller.openProfile();
-                              },
-                              child: MenuItem(Icons.person, "Profil", "")),
-                          InkWell(
-                              onTap: () {
-                                controller.openEditProfile();
-                              },
-                              child:
-                                  MenuItem(Icons.list_alt, "Edit Profil", "")),
-                          InkWell(
-                              onTap: () {
-                                controller.openProfile();
-                              },
-                              child: MenuItem(
-                                  Icons.card_membership, "Membership", "GOLD")),
-                          InkWell(
-                              onTap: () {
-                                controller.openProfile();
-                              },
-                              child:
-                                  MenuItem(Icons.list, "Riwayat Donasi", "")),
-                          InkWell(
-                              onTap: () {
-                                controller.openProfile();
-                              },
-                              child: MenuItem(
-                                  Icons.question_answer_outlined, "FAQ", "")),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    InkWell(
-                      onTap: () => controller.logout(),
-                      child: const Text(
-                        "LOGOUT",
-                        style: TextStyle(
-                          color: Color.fromRGBO(150, 47, 191, 1),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              user.nim == null
+                                  ? InkWell(
+                                      onTap: () {
+                                        Get.delete<UserProfileController>();
+                                        Get.to(() => const VerifNimView());
+                                      },
+                                      child: MenuItem(
+                                          Icons.verified, "Verifikasi NIM", ""))
+                                  : Column(
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              controller.openProfile();
+                                            },
+                                            child: MenuItem(
+                                                Icons.person, "Profil", "")),
+                                        InkWell(
+                                            onTap: () {
+                                              controller.openEditProfile();
+                                            },
+                                            child: MenuItem(Icons.list_alt,
+                                                "Edit Profil", "")),
+                                        InkWell(
+                                            onTap: () {
+                                              controller.openProfile();
+                                            },
+                                            child: MenuItem(
+                                                Icons.card_membership,
+                                                "Membership",
+                                                "GOLD")),
+                                      ],
+                                    ),
+                              InkWell(
+                                  onTap: () {
+                                    controller.openProfile();
+                                  },
+                                  child: MenuItem(
+                                      Icons.list, "Riwayat Donasi", "")),
+                              InkWell(
+                                  onTap: () {
+                                    controller.openProfile();
+                                  },
+                                  child: MenuItem(
+                                      Icons.question_answer_outlined,
+                                      "FAQ",
+                                      "")),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        InkWell(
+                          onTap: () => controller.logout(),
+                          child: const Text(
+                            "LOGOUT",
+                            style: TextStyle(
+                              color: Color.fromRGBO(150, 47, 191, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  })),
             ),
           );
         });

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kafegama/core.dart';
-import 'package:kafegama/model/user_profile/user_profile.dart';
 
 class EditProfilController extends GetxController {
   EditProfilView? view;
@@ -72,23 +71,18 @@ class EditProfilController extends GetxController {
         );
       } else {
         alumni.value = userProfile.data!;
-        tempatLahirC.text =
-            alumni.value.tempatLahir != null ? alumni.value.tempatLahir! : "";
+        tempatLahirC.text = alumni.value.tempatLahir ?? "";
         alumni.value.tglLahir != null
             ? _tglLahir.value = DateTime.parse(alumni.value.tglLahir!)
             : "";
-        alamatC.text = alumni.value.alamat != null ? alumni.value.alamat! : "";
-        degreeC.text = alumni.value.degree != null ? alumni.value.degree! : "";
+        alamatC.text = alumni.value.alamat ?? "";
+        degreeC.text = alumni.value.degree ?? "";
         namaPerusahaanC.text = alumni.value.namaPerusahaan != null
             ? alumni.value.namaPerusahaan!
             : "";
-        jabatanC.text = alumni.value.posisi != null ? alumni.value.posisi! : "";
-        bidangUsahaC.text = alumni.value.bidangUsahaPerusahaan != null
-            ? alumni.value.bidangUsahaPerusahaan!
-            : "";
-        kotaPerusahaanC.text = alumni.value.kotaTempatKerja != null
-            ? alumni.value.kotaTempatKerja!
-            : "";
+        jabatanC.text = alumni.value.posisi ?? "";
+        bidangUsahaC.text = alumni.value.bidangUsahaPerusahaan ?? "";
+        kotaPerusahaanC.text = alumni.value.kotaTempatKerja ?? "";
 
         alumni.value.sex != null ? _jenisKelamin.value = alumni.value.sex! : "";
         alumni.value.department != null
@@ -152,5 +146,88 @@ class EditProfilController extends GetxController {
     photo.value = (await _picker.pickImage(
         source: ImageSource.gallery, imageQuality: 25))!;
     Get.back();
+  }
+
+  Future<void> save() async {
+    if (alamatC.text.isEmpty) {
+      Get.snackbar(
+        "Error",
+        "Alamat wajib diisi",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+      return;
+    }
+
+    if (_department.value == '') {
+      Get.snackbar(
+        "Error",
+        "Department wajib diisi",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+      return;
+    }
+
+    if (degreeC.text.isEmpty) {
+      Get.snackbar(
+        "Error",
+        "Degree wajib diisi",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+      return;
+    }
+
+    APIProvider apiProvider = Get.find();
+    isLoading.value = true;
+    try {
+      final result = await apiProvider.editProfile(
+          photo.value,
+          _jenisKelamin.value,
+          tempatLahirC.text,
+          _tglLahir.value,
+          alamatC.text,
+          _department.value,
+          degreeC.text,
+          _statusPekerjaan.value,
+          namaPerusahaanC.text,
+          jabatanC.text,
+          bidangUsahaC.text,
+          kotaPerusahaanC.text);
+
+      if (result.error != null) {
+        Get.defaultDialog(
+          title: "Error",
+          middleText: result.error.toString(),
+          textConfirm: "OK",
+          radius: 6,
+          onConfirm: () {
+            Get.close(2);
+          },
+        );
+
+        return;
+      }
+
+      Get.defaultDialog(
+          title: "Success",
+          middleText: result.message ?? "",
+          backgroundColor: Colors.white,
+          textConfirm: "OK",
+          radius: 6,
+          onConfirm: () {
+            Get.close(2);
+          });
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "error:: " + e.toString(),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

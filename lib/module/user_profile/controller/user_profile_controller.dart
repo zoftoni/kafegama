@@ -12,15 +12,26 @@ class UserProfileController extends GetxController {
 
   // ignore: prefer_typing_uninitialized_variables
   var mainController;
+  final user = User().obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    SessionManager().containsKey("USER").then((value) {
+      if (value) {
+        SessionManager().get("USER").then((value) => {
+              if (value != null)
+                {user.value = User.fromJson(value)}
+              else
+                {user.value = User()}
+            });
+      }
+    });
+  }
 
   UserProfileController(
     this.mainController,
   );
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
 
   Future<void> logout() async {
     isLoading.value = true;

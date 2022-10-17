@@ -20,6 +20,9 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       idStatusAnggota: json['id_status_anggota'],
       statusAnggotaExpiredDate: json['status_anggota_expired_date'],
       isDataAlumniEntered: json['is_data_alumni_entered'] as int?,
+      isVerified: json['is_verified'] as int?,
+      nim: json['nim'] as String?,
+      photo: json['photo'] as String?,
       statusAnggota: json['status_anggota'] as String?,
     );
 
@@ -37,5 +40,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id_status_anggota': instance.idStatusAnggota,
       'status_anggota_expired_date': instance.statusAnggotaExpiredDate,
       'is_data_alumni_entered': instance.isDataAlumniEntered,
+      'is_verified': instance.isVerified,
+      'nim': instance.nim,
+      'photo': instance.photo,
       'status_anggota': instance.statusAnggota,
     };

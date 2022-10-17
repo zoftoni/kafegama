@@ -26,6 +26,10 @@ class User {
   dynamic statusAnggotaExpiredDate;
   @JsonKey(name: 'is_data_alumni_entered')
   int? isDataAlumniEntered;
+  @JsonKey(name: 'is_verified')
+  int? isVerified;
+  String? nim;
+  String? photo;
   @JsonKey(name: 'status_anggota')
   String? statusAnggota;
 
@@ -43,6 +47,9 @@ class User {
     this.idStatusAnggota,
     this.statusAnggotaExpiredDate,
     this.isDataAlumniEntered,
+    this.isVerified,
+    this.nim,
+    this.photo,
     this.statusAnggota,
   });
 

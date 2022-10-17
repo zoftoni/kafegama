@@ -38,8 +38,8 @@ class Alumni {
   int? angkatanTahun;
   @JsonKey(name: 'lulusan_tahun')
   int? lulusanTahun;
-  @JsonKey(name: 'nis')
-  String? nis;
+  @JsonKey(name: 'nim')
+  String? nim;
 
   Alumni(
       {this.idAlumni,
@@ -63,7 +63,7 @@ class Alumni {
       this.tglLahir,
       this.angkatanTahun,
       this.lulusanTahun,
-      this.nis});
+      this.nim});
 
   factory Alumni.fromJson(Map<String, dynamic> json) {
     return _$AlumniFromJson(json);

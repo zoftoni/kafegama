@@ -101,14 +101,25 @@ class ProfilView extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Angkatan",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 10.0,
                                 ),
-                              )
+                              ),
+                              alumni.angkatanTahun != null
+                                  ? Text(
+                                      alumni.angkatanTahun!.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : const SizedBox(
+                                      height: 10.0,
+                                    ),
                             ],
                           ),
                         ],

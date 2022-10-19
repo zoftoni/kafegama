@@ -38,23 +38,24 @@ class UserProfileController extends GetxController {
     // APIProvider apiProvider = Get.find();
 
     try {
-      // final result = await apiProvider.logout();
-      // if (result.error != null) {
-      //   Get.snackbar(
-      //     "Error",
-      //     result.error ?? "",
-      //     snackPosition: SnackPosition.TOP,
-      //     backgroundColor: Colors.white,
-      //   );
-      //   return;
-      // }
+      APIProvider apiProvider = Get.find();
+      final result = await apiProvider.logout();
+      if (result.error != null) {
+        Get.snackbar(
+          "Error",
+          result.error ?? "",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.white,
+        );
+        return;
+      }
 
       await SessionManager()
           .remove("USER")
           .then((value) => SessionManager().remove("TOKEN").then((value) {
                 isLoading.value = false;
                 // mainController.goToHome();
-                Get.off(const LoginView());
+                Get.off(() => const LoginView());
               }));
     } catch (e) {
       isLoading.value = false;
@@ -65,13 +66,5 @@ class UserProfileController extends GetxController {
         backgroundColor: Colors.white,
       );
     }
-  }
-
-  openProfile() async {
-    Get.to(() => const ProfilView());
-  }
-
-  openEditProfile() async {
-    Get.to(() => const EditProfilView());
   }
 }

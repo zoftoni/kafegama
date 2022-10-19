@@ -63,35 +63,46 @@ class UserProfileView extends StatelessWidget {
                                       children: [
                                         InkWell(
                                             onTap: () {
-                                              controller.openProfile();
+                                              Get.to(() => const ProfilView());
                                             },
                                             child: MenuItem(
                                                 Icons.person, "Profil", "")),
                                         InkWell(
                                             onTap: () {
-                                              controller.openEditProfile();
+                                              Get.to(
+                                                  () => const EditProfilView());
                                             },
                                             child: MenuItem(Icons.list_alt,
                                                 "Edit Profil", "")),
                                         InkWell(
                                             onTap: () {
-                                              controller.openProfile();
+                                              Get.to(
+                                                  () => const MembershipView());
                                             },
                                             child: MenuItem(
                                                 Icons.card_membership,
-                                                "Membership",
-                                                "GOLD")),
+                                                "Iuran Membership",
+                                                "")),
+                                        InkWell(
+                                            onTap: () {
+                                              Get.to(() =>
+                                                  const IuranHistoryView());
+                                            },
+                                            child: MenuItem(
+                                                Icons.list_alt_sharp,
+                                                "Riwayat Iuran",
+                                                "")),
                                       ],
                                     ),
                               InkWell(
                                   onTap: () {
-                                    controller.openProfile();
+                                    Get.to(() => const DonasiHistoryView());
                                   },
                                   child: MenuItem(
                                       Icons.list, "Riwayat Donasi", "")),
                               InkWell(
                                   onTap: () {
-                                    controller.openProfile();
+                                    Get.to(() => const FaqView());
                                   },
                                   child: MenuItem(
                                       Icons.question_answer_outlined,

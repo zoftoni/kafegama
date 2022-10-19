@@ -86,7 +86,7 @@ class HomeView extends StatelessWidget {
                             )
                           : SizedBox(
                               width: double.infinity,
-                              height: 80,
+                              height: 90,
                               child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: Row(
@@ -110,9 +110,27 @@ class HomeView extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
+                                              Row(
+                                                children: [
+                                                  Text(user.statusAnggota! +
+                                                      " MEMBER"),
+                                                  user.statusAnggota ==
+                                                          'PREMIUM'
+                                                      ? const Icon(
+                                                          Icons.star,
+                                                          color: Colors
+                                                              .orangeAccent,
+                                                        )
+                                                      : const SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                ],
+                                              ),
                                               Text(
                                                 user.name!,
                                                 style: Theme.of(context)
@@ -133,11 +151,10 @@ class HomeView extends StatelessWidget {
                                                 Get.to(
                                                     () => const VerifNimView());
                                               },
-                                              child:
-                                                  const Text("Verifikasi NIM"),
+                                              child: const Text("Verif NIM"),
                                             )
                                           : const SizedBox(
-                                              height: 10.0,
+                                              height: 20.0,
                                             ),
                                     ),
                                   ],

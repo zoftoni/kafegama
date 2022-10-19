@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../controller/membership_controller.dart';
+import 'package:kafegama/core.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 import 'package:get/get.dart';
 
@@ -14,20 +15,49 @@ class MembershipView extends StatelessWidget {
         controller.view = this;
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("Membership"),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: const [
-                  //body
-                ],
+            appBar: AppBar(
+              elevation: 0.0,
+              flexibleSpace: const AppBarBG(),
+              centerTitle: true,
+              iconTheme: const IconThemeData(
+                color: Colors.white,
               ),
+              title: const Text("MEMBERSHIP"),
             ),
-          ),
-        );
+            body: Column(children: [
+              Expanded(
+                child: Obx(() {
+                  return LazyLoadScrollView(
+                    onEndOfPage: () => controller.getData(),
+                    child: RefreshIndicator(
+                      onRefresh: () => controller.handleRefresh(),
+                      child: ListView.builder(
+                        itemCount: controller.membershipList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var membership =
+                              controller.membershipList.elementAt(index);
+                          return InkWell(
+                              onTap: () {
+                                // Get.to(() => const DonasiCampaignDetailView(),
+                                //     arguments: [
+                                //       {"donasiCampaign": donasiCampaign}
+                                //     ]);
+                              },
+                              child: Card(
+                                elevation: 5,
+                                child: ListTile(
+                                  leading: Image.network(membership.img!),
+                                  title: Text(membership.title!),
+                                  subtitle: Text(membership.desc!),
+                                ),
+                              ));
+                        },
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ]));
       },
     );
   }

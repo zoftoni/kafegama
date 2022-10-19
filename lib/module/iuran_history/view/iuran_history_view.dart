@@ -5,13 +5,13 @@ import 'package:intl/intl.dart';
 
 import 'package:get/get.dart';
 
-class DonasiHistoryView extends StatelessWidget {
-  const DonasiHistoryView({Key? key}) : super(key: key);
+class IuranHistoryView extends StatelessWidget {
+  const IuranHistoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DonasiHistoryController>(
-      init: DonasiHistoryController(),
+    return GetBuilder<IuranHistoryController>(
+      init: IuranHistoryController(),
       builder: (controller) {
         controller.view = this;
 
@@ -23,7 +23,7 @@ class DonasiHistoryView extends StatelessWidget {
               iconTheme: const IconThemeData(
                 color: Colors.white,
               ),
-              title: const Text("DONASI"),
+              title: const Text("IURAN MEMBERSHIP"),
             ),
             body: Column(children: [
               Padding(
@@ -80,17 +80,24 @@ class DonasiHistoryView extends StatelessWidget {
                     child: RefreshIndicator(
                       onRefresh: () => controller.handleRefresh(),
                       child: ListView.builder(
-                        itemCount: controller.donasiTrxList.length,
+                        itemCount: controller.iuranTrxList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          var donasiTrx =
-                              controller.donasiTrxList.elementAt(index);
+                          var iuranTrx =
+                              controller.iuranTrxList.elementAt(index);
                           final numFormat = NumberFormat("#,##0", "id_ID");
-                          return ListTile(
-                            title: Text(donasiTrx.campaign!),
-                            subtitle: Text(donasiTrx.trxDate),
-                            trailing: Text(
-                                numFormat.format(int.parse(donasiTrx.amount))),
-                          );
+                          return controller.iuranTrxList.isNotEmpty
+                              ? ListTile(
+                                  title: Text(iuranTrx.jenis!),
+                                  subtitle: Text(iuranTrx.trxDate +
+                                      " untuk " +
+                                      iuranTrx.period +
+                                      " hari"),
+                                  trailing: Text(numFormat
+                                      .format(int.parse(iuranTrx.amount))),
+                                )
+                              : const SizedBox(
+                                  height: 20.0,
+                                );
                         },
                       ),
                     ),

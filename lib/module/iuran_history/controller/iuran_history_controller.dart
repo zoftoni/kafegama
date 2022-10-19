@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kafegama/model/donasi_trx/donasi_trx.dart';
-import 'package:kafegama/model/donasi_trx/donasi_trx_list.dart';
+import 'package:kafegama/model/iuran_trx/iuran_trx.dart';
+import 'package:kafegama/model/iuran_trx/iuran_trx_list.dart';
 
 import 'package:kafegama/service/api_provider.dart';
-import '../view/donasi_history_view.dart';
+import '../view/iuran_history_view.dart';
 
-class DonasiHistoryController extends GetxController {
-  DonasiHistoryView? view;
+class IuranHistoryController extends GetxController {
+  IuranHistoryView? view;
   RxBool isLoading = false.obs;
-  final _donasiTrxList = <DonasiTrx>[].obs;
-  List<DonasiTrx> get donasiTrxList => _donasiTrxList.toList();
+  final _iuranTrxList = <IuranTrx>[].obs;
+  List<IuranTrx> get iuranTrxList => _iuranTrxList.toList();
   int page = 0;
   String keyword = "";
 
@@ -22,8 +22,8 @@ class DonasiHistoryController extends GetxController {
 
   Future<void> handleRefresh() async {
     page = 0;
-    donasiTrxList.clear();
-    _donasiTrxList.clear();
+    iuranTrxList.clear();
+    _iuranTrxList.clear();
     getData();
   }
 
@@ -31,18 +31,18 @@ class DonasiHistoryController extends GetxController {
     isLoading.value = true;
     APIProvider apiProvider = Get.find();
     try {
-      final result = await apiProvider.getDonasiTrx(++page, keyword);
-      DonasiTrxList resultList = result;
+      final result = await apiProvider.getIuranTrx(++page, keyword);
+      IuranTrxList resultList = result;
       if (page > resultList.meta!.lastPage!.toInt()) {
         return;
       }
 
       if (resultList.meta!.lastPage!.toInt() == 1) {
-        donasiTrxList.clear();
+        iuranTrxList.clear();
       }
 
       page = resultList.meta!.currentPage!;
-      _donasiTrxList.addAll(resultList.data!);
+      _iuranTrxList.addAll(resultList.data!);
     } catch (e) {
       Get.snackbar(
         "Error",

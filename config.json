@@ -23,6 +23,7 @@
     "profil",
     "edit_profil",
     "membership",
-    "verif_nim"
+    "verif_nim",
+    "iuran_history"
   ]
 }

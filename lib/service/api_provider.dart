@@ -6,8 +6,8 @@ import 'package:get/get.dart' as getx;
 import 'package:kafegama/core.dart';
 
 class APIProvider {
-  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  // static const String _baseUrl = 'https://kafegamaa.com/api/';
+  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  static const String _baseUrl = 'https://kafegamaa.com/api/';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';
@@ -21,6 +21,9 @@ class APIProvider {
   static const String _EDIT_PROFILE = 'edit-profile';
   static const String _VERIFIKASI_NIM = 'verifikasi-nim';
   static const String _REFRESH_USER = 'refresh-user';
+  static const String _DONASI_TRX = 'donasi-trx';
+  static const String _IURAN_TRX = 'iuran-trx';
+  static const String _JENIS_ANGGOTA = 'jenis-anggota';
 
   final Dio _dio = Dio();
 
@@ -63,7 +66,7 @@ class APIProvider {
           break;
         case DioErrorType.response:
           if (dioError.response?.statusCode == 401) {
-            getx.Get.off(const LoginView());
+            getx.Get.off(() => const LoginView());
           }
           // errorDescription = dioError.response?.data["error"];
           errorDescription =
@@ -241,10 +244,10 @@ class APIProvider {
   //
   Future<BursaKerjaList> getBursaKerja(page, keyword) async {
     try {
-      Response response = await _dio.get(
-        _BURSA_KERJA,
-        queryParameters: {'page': page, 'q': keyword},
-      );
+      Response response = await _dio.get(_BURSA_KERJA,
+          queryParameters: {'page': page, 'q': keyword},
+          options: Options(
+              headers: {"requiresToken": true, "Accept": "application/json"}));
       return BursaKerjaList.fromJson(response.data);
     } on DioError catch (e) {
       // print("error");
@@ -260,10 +263,10 @@ class APIProvider {
   //
   Future<AlumniList> getAlumni(page, keyword) async {
     try {
-      Response response = await _dio.get(
-        _ALUMNI,
-        queryParameters: {'page': page, 'q': keyword},
-      );
+      Response response = await _dio.get(_ALUMNI,
+          queryParameters: {'page': page, 'q': keyword},
+          options: Options(
+              headers: {"requiresToken": true, "Accept": "application/json"}));
       return AlumniList.fromJson(response.data);
     } on DioError catch (e) {
       // print("error");
@@ -357,6 +360,45 @@ class APIProvider {
     } on DioError catch (e) {
       // print("Exception occured: $error stackTrace: $stacktrace");
       return LoginResponse.withError(_handleError(e));
+    }
+  }
+
+  Future<DonasiTrxList> getDonasiTrx(page, keyword) async {
+    try {
+      Response response = await _dio.get(_DONASI_TRX,
+          queryParameters: {'page': page, 'q': keyword},
+          options: Options(headers: {"requiresToken": true}));
+      return DonasiTrxList.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return DonasiTrxList.withError(_handleError(e));
+    }
+  }
+
+  Future<JenisAnggotaList> getJenisAnggota() async {
+    try {
+      Response response = await _dio.get(_JENIS_ANGGOTA,
+          options: Options(headers: {"requiresToken": true}));
+      return JenisAnggotaList.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return JenisAnggotaList.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
+    }
+  }
+
+  Future<IuranTrxList> getIuranTrx(page, keyword) async {
+    try {
+      Response response = await _dio.get(_IURAN_TRX,
+          queryParameters: {'page': page, 'q': keyword},
+          options: Options(headers: {"requiresToken": true}));
+      return IuranTrxList.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return IuranTrxList.withError(_handleError(e));
     }
   }
 }

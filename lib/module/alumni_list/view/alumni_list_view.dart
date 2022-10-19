@@ -99,13 +99,24 @@ class AlumniListView extends StatelessWidget {
                             itemBuilder: (BuildContext context, int index) {
                               var alumni =
                                   controller.alumniList.elementAt(index);
-
+                              var user = controller.user.value;
                               return InkWell(
                                   onTap: () {
-                                    Get.to(() => const AlumniDetailView(),
-                                        arguments: [
-                                          {"alumni": alumni}
-                                        ]);
+                                    user.statusAnggota == "PREMIUM"
+                                        ? Get.to(() => const AlumniDetailView(),
+                                            arguments: [
+                                                {"alumni": alumni}
+                                              ])
+                                        : Get.defaultDialog(
+                                            title: "Blocked",
+                                            middleText:
+                                                "member PREMIUM bisa membuka data ini",
+                                            backgroundColor: Colors.white,
+                                            textConfirm: "OK",
+                                            radius: 6,
+                                            onConfirm: () {
+                                              Get.back();
+                                            });
                                   },
                                   child: Card(
                                     elevation: 5,
@@ -129,10 +140,13 @@ class AlumniListView extends StatelessWidget {
                                                 "assets/image/kafegama.png",
                                               ),
                                             ),
-                                            title: Text(alumni.nama!),
-                                            subtitle: Text(alumni.nim!),
-                                            trailing: Text(alumni.angkatanTahun!
-                                                .toString()),
+                                            title: Text(alumni.nama ?? ""),
+                                            subtitle: Text(alumni.nim ?? ""),
+                                            trailing: Text(
+                                                alumni.angkatanTahun != null
+                                                    ? alumni.angkatanTahun
+                                                        .toString()
+                                                    : ""),
                                           ),
                                   ));
                             }),

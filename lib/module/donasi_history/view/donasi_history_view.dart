@@ -16,16 +16,17 @@ class DonasiHistoryView extends StatelessWidget {
         controller.view = this;
 
         return Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              flexibleSpace: const AppBarBG(),
-              centerTitle: true,
-              iconTheme: const IconThemeData(
-                color: Colors.white,
-              ),
-              title: const Text("DONASI"),
+          appBar: AppBar(
+            elevation: 0.0,
+            flexibleSpace: const AppBarBG(),
+            centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: Colors.white,
             ),
-            body: Column(children: [
+            title: const Text("DONASI"),
+          ),
+          body: Obx(() {
+            return Column(children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -51,6 +52,8 @@ class DonasiHistoryView extends StatelessWidget {
                       ),
                       Expanded(
                         child: TextFormField(
+                          onFieldSubmitted: (value) =>
+                              {controller.search(value)},
                           initialValue: null,
                           decoration: const InputDecoration.collapsed(
                             filled: true,
@@ -74,30 +77,34 @@ class DonasiHistoryView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Obx(() {
-                  return LazyLoadScrollView(
-                    onEndOfPage: () => controller.getData(),
-                    child: RefreshIndicator(
-                      onRefresh: () => controller.handleRefresh(),
-                      child: ListView.builder(
-                        itemCount: controller.donasiTrxList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var donasiTrx =
-                              controller.donasiTrxList.elementAt(index);
-                          final numFormat = NumberFormat("#,##0", "id_ID");
-                          return ListTile(
-                            title: Text(donasiTrx.campaign!),
-                            subtitle: Text(donasiTrx.trxDate),
-                            trailing: Text(
-                                numFormat.format(int.parse(donasiTrx.amount))),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                }),
-              ),
-            ]));
+                  child: LazyLoadScrollView(
+                onEndOfPage: () => controller.getData(),
+                child: RefreshIndicator(
+                  onRefresh: () => controller.handleRefresh(),
+                  child: ListView.builder(
+                    itemCount: controller.donasiTrxList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var donasiTrx = controller.donasiTrxList.elementAt(index);
+                      final numFormat = NumberFormat("#,##0", "id_ID");
+                      return ListTile(
+                        title: Text(donasiTrx.campaign!),
+                        subtitle: Text(donasiTrx.trxDate),
+                        trailing:
+                            Text(numFormat.format(int.parse(donasiTrx.amount))),
+                      );
+                    },
+                  ),
+                ),
+              )),
+              Container(
+                  child: (controller.isLoading.value)
+                      ? const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: CircularProgressIndicator())
+                      : Row())
+            ]);
+          }),
+        );
       },
     );
   }

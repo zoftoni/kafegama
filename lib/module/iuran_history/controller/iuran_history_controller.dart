@@ -27,6 +27,14 @@ class IuranHistoryController extends GetxController {
     getData();
   }
 
+  Future<void> search(value) async {
+    keyword = value;
+    page = 0;
+    iuranTrxList.clear();
+    _iuranTrxList.clear();
+    getData();
+  }
+
   Future<void> getData() async {
     isLoading.value = true;
     APIProvider apiProvider = Get.find();
@@ -52,6 +60,7 @@ class IuranHistoryController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 }

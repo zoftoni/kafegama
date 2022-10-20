@@ -24,6 +24,9 @@
     "edit_profil",
     "membership",
     "verif_nim",
-    "iuran_history"
+    "iuran_history",
+    "donasi_payment",
+    "iuran_payment",
+    "payment_result"
   ]
 }

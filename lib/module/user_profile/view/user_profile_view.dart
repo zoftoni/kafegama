@@ -31,102 +31,113 @@ class UserProfileView extends StatelessWidget {
                   padding: const EdgeInsets.all(30.0),
                   child: Obx(() {
                     var user = controller.user.value;
-                    return Column(
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12.0),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x19000000),
-                                blurRadius: 24,
-                                offset: Offset(0, 11),
-                              ),
-                            ],
-                          ),
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    return controller.isLoading.value
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(child: Text("..loading...")),
+                          )
+                        : Column(
                             children: [
-                              user.nim == null
-                                  ? InkWell(
-                                      onTap: () {
-                                        Get.delete<UserProfileController>();
-                                        Get.to(() => const VerifNimView());
-                                      },
-                                      child: MenuItem(
-                                          Icons.verified, "Verifikasi NIM", ""))
-                                  : Column(
-                                      children: [
-                                        InkWell(
-                                            onTap: () {
-                                              Get.to(() => const ProfilView());
-                                            },
-                                            child: MenuItem(
-                                                Icons.person, "Profil", "")),
-                                        InkWell(
-                                            onTap: () {
-                                              Get.to(
-                                                  () => const EditProfilView());
-                                            },
-                                            child: MenuItem(Icons.list_alt,
-                                                "Edit Profil", "")),
-                                        InkWell(
-                                            onTap: () {
-                                              Get.to(
-                                                  () => const MembershipView());
-                                            },
-                                            child: MenuItem(
-                                                Icons.card_membership,
-                                                "Iuran Membership",
-                                                "")),
-                                        InkWell(
-                                            onTap: () {
-                                              Get.to(() =>
-                                                  const IuranHistoryView());
-                                            },
-                                            child: MenuItem(
-                                                Icons.list_alt_sharp,
-                                                "Riwayat Iuran",
-                                                "")),
-                                      ],
+                              Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12.0),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x19000000),
+                                      blurRadius: 24,
+                                      offset: Offset(0, 11),
                                     ),
+                                  ],
+                                ),
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    user.nim == null
+                                        ? InkWell(
+                                            onTap: () {
+                                              Get.delete<
+                                                  UserProfileController>();
+                                              Get.to(
+                                                  () => const VerifNimView());
+                                            },
+                                            child: MenuItem(Icons.verified,
+                                                "Verifikasi NIM", ""))
+                                        : Column(
+                                            children: [
+                                              InkWell(
+                                                  onTap: () {
+                                                    Get.to(() =>
+                                                        const ProfilView());
+                                                  },
+                                                  child: MenuItem(Icons.person,
+                                                      "Profil", "")),
+                                              InkWell(
+                                                  onTap: () {
+                                                    Get.to(() =>
+                                                        const EditProfilView());
+                                                  },
+                                                  child: MenuItem(
+                                                      Icons.list_alt,
+                                                      "Edit Profil",
+                                                      "")),
+                                              InkWell(
+                                                  onTap: () {
+                                                    Get.to(() =>
+                                                        const MembershipView());
+                                                  },
+                                                  child: MenuItem(
+                                                      Icons.card_membership,
+                                                      "Iuran Membership",
+                                                      "")),
+                                              InkWell(
+                                                  onTap: () {
+                                                    Get.to(() =>
+                                                        const IuranHistoryView());
+                                                  },
+                                                  child: MenuItem(
+                                                      Icons.list_alt_sharp,
+                                                      "Riwayat Iuran",
+                                                      "")),
+                                            ],
+                                          ),
+                                    InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                              () => const DonasiHistoryView());
+                                        },
+                                        child: MenuItem(
+                                            Icons.list, "Riwayat Donasi", "")),
+                                    InkWell(
+                                        onTap: () {
+                                          Get.to(() => const FaqView());
+                                        },
+                                        child: MenuItem(
+                                            Icons.question_answer_outlined,
+                                            "FAQ",
+                                            "")),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
                               InkWell(
-                                  onTap: () {
-                                    Get.to(() => const DonasiHistoryView());
-                                  },
-                                  child: MenuItem(
-                                      Icons.list, "Riwayat Donasi", "")),
-                              InkWell(
-                                  onTap: () {
-                                    Get.to(() => const FaqView());
-                                  },
-                                  child: MenuItem(
-                                      Icons.question_answer_outlined,
-                                      "FAQ",
-                                      "")),
+                                onTap: () => controller.logout(),
+                                child: const Text(
+                                  "LOGOUT",
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(150, 47, 191, 1),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
                             ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30.0,
-                        ),
-                        InkWell(
-                          onTap: () => controller.logout(),
-                          child: const Text(
-                            "LOGOUT",
-                            style: TextStyle(
-                              color: Color.fromRGBO(150, 47, 191, 1),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        )
-                      ],
-                    );
+                          );
                   })),
             ),
           );

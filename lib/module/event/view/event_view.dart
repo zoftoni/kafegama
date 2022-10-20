@@ -50,6 +50,8 @@ class EventView extends StatelessWidget {
                       ),
                       Expanded(
                         child: TextFormField(
+                          onFieldSubmitted: (value) =>
+                              {controller.search(value)},
                           initialValue: null,
                           decoration: const InputDecoration.collapsed(
                             filled: true,
@@ -76,6 +78,7 @@ class EventView extends StatelessWidget {
                 child: Obx(() {
                   return LazyLoadScrollView(
                     onEndOfPage: () => controller.getData(),
+                    isLoading: controller.isLoading.value,
                     child: RefreshIndicator(
                       onRefresh: () => controller.handleRefresh(),
                       child: ListView.builder(
@@ -139,6 +142,12 @@ class EventView extends StatelessWidget {
                   );
                 }),
               ),
+              Container(
+                  child: (controller.isLoading.value)
+                      ? const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: CircularProgressIndicator())
+                      : Row())
             ]));
       },
     );

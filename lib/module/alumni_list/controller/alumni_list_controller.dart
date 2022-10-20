@@ -46,6 +46,14 @@ class AlumniListController extends GetxController {
     getData();
   }
 
+  Future<void> search(value) async {
+    keyword = value;
+    page = 0;
+    alumniList.clear();
+    _alumniList.clear();
+    getData();
+  }
+
   Future<void> getData() async {
     isLoading.value = true;
     APIProvider apiProvider = Get.find();
@@ -82,6 +90,7 @@ class AlumniListController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 }

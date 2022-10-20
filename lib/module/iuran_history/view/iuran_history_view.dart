@@ -16,16 +16,17 @@ class IuranHistoryView extends StatelessWidget {
         controller.view = this;
 
         return Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              flexibleSpace: const AppBarBG(),
-              centerTitle: true,
-              iconTheme: const IconThemeData(
-                color: Colors.white,
-              ),
-              title: const Text("IURAN MEMBERSHIP"),
+          appBar: AppBar(
+            elevation: 0.0,
+            flexibleSpace: const AppBarBG(),
+            centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: Colors.white,
             ),
-            body: Column(children: [
+            title: const Text("IURAN MEMBERSHIP"),
+          ),
+          body: Obx(() {
+            return Column(children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -51,6 +52,8 @@ class IuranHistoryView extends StatelessWidget {
                       ),
                       Expanded(
                         child: TextFormField(
+                          onFieldSubmitted: (value) =>
+                              {controller.search(value)},
                           initialValue: null,
                           decoration: const InputDecoration.collapsed(
                             filled: true,
@@ -74,37 +77,41 @@ class IuranHistoryView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Obx(() {
-                  return LazyLoadScrollView(
-                    onEndOfPage: () => controller.getData(),
-                    child: RefreshIndicator(
-                      onRefresh: () => controller.handleRefresh(),
-                      child: ListView.builder(
-                        itemCount: controller.iuranTrxList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var iuranTrx =
-                              controller.iuranTrxList.elementAt(index);
-                          final numFormat = NumberFormat("#,##0", "id_ID");
-                          return controller.iuranTrxList.isNotEmpty
-                              ? ListTile(
-                                  title: Text(iuranTrx.jenis!),
-                                  subtitle: Text(iuranTrx.trxDate +
-                                      " untuk " +
-                                      iuranTrx.period +
-                                      " hari"),
-                                  trailing: Text(numFormat
-                                      .format(int.parse(iuranTrx.amount))),
-                                )
-                              : const SizedBox(
-                                  height: 20.0,
-                                );
-                        },
-                      ),
-                    ),
-                  );
-                }),
-              ),
-            ]));
+                  child: LazyLoadScrollView(
+                onEndOfPage: () => controller.getData(),
+                child: RefreshIndicator(
+                  onRefresh: () => controller.handleRefresh(),
+                  child: ListView.builder(
+                    itemCount: controller.iuranTrxList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var iuranTrx = controller.iuranTrxList.elementAt(index);
+                      final numFormat = NumberFormat("#,##0", "id_ID");
+                      return controller.iuranTrxList.isNotEmpty
+                          ? ListTile(
+                              title: Text(iuranTrx.jenis!),
+                              subtitle: Text(iuranTrx.trxDate +
+                                  " untuk " +
+                                  iuranTrx.period +
+                                  " hari"),
+                              trailing: Text(
+                                  numFormat.format(int.parse(iuranTrx.amount))),
+                            )
+                          : const SizedBox(
+                              height: 20.0,
+                            );
+                    },
+                  ),
+                ),
+              )),
+              Container(
+                  child: (controller.isLoading.value)
+                      ? const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: CircularProgressIndicator())
+                      : Row())
+            ]);
+          }),
+        );
       },
     );
   }

@@ -27,34 +27,39 @@ class MembershipView extends StatelessWidget {
             body: Column(children: [
               Expanded(
                 child: Obx(() {
-                  return LazyLoadScrollView(
-                    onEndOfPage: () => controller.getData(),
-                    child: RefreshIndicator(
-                      onRefresh: () => controller.handleRefresh(),
-                      child: ListView.builder(
-                        itemCount: controller.membershipList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var membership =
-                              controller.membershipList.elementAt(index);
-                          return InkWell(
-                              onTap: () {
-                                // Get.to(() => const DonasiCampaignDetailView(),
-                                //     arguments: [
-                                //       {"donasiCampaign": donasiCampaign}
-                                //     ]);
+                  return controller.isLoading.value
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(child: Text("..loading...")),
+                        )
+                      : LazyLoadScrollView(
+                          onEndOfPage: () => controller.getData(),
+                          child: RefreshIndicator(
+                            onRefresh: () => controller.handleRefresh(),
+                            child: ListView.builder(
+                              itemCount: controller.membershipList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                var membership =
+                                    controller.membershipList.elementAt(index);
+                                return InkWell(
+                                    onTap: () {
+                                      // Get.to(() => const DonasiCampaignDetailView(),
+                                      //     arguments: [
+                                      //       {"donasiCampaign": donasiCampaign}
+                                      //     ]);
+                                    },
+                                    child: Card(
+                                      elevation: 5,
+                                      child: ListTile(
+                                        leading: Image.network(membership.img!),
+                                        title: Text(membership.title!),
+                                        subtitle: Text(membership.desc!),
+                                      ),
+                                    ));
                               },
-                              child: Card(
-                                elevation: 5,
-                                child: ListTile(
-                                  leading: Image.network(membership.img!),
-                                  title: Text(membership.title!),
-                                  subtitle: Text(membership.desc!),
-                                ),
-                              ));
-                        },
-                      ),
-                    ),
-                  );
+                            ),
+                          ),
+                        );
                 }),
               ),
             ]));

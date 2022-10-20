@@ -27,6 +27,14 @@ class DonasiHistoryController extends GetxController {
     getData();
   }
 
+  Future<void> search(value) async {
+    keyword = value;
+    page = 0;
+    donasiTrxList.clear();
+    _donasiTrxList.clear();
+    getData();
+  }
+
   Future<void> getData() async {
     isLoading.value = true;
     APIProvider apiProvider = Get.find();
@@ -52,6 +60,7 @@ class DonasiHistoryController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 }

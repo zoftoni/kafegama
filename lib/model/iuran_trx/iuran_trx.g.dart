@@ -12,7 +12,7 @@ IuranTrx _$IuranTrxFromJson(Map<String, dynamic> json) => IuranTrx(
       idJenisAnggota: json['id_jenis_anggota'] as int?,
       trxDate: json['trx_date'],
       amount: json['amount'],
-      period: json['period'],
+      period: json['validity_period'],
       jenis: json['jenis'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
@@ -26,6 +26,6 @@ Map<String, dynamic> _$IuranTrxToJson(IuranTrx instance) => <String, dynamic>{
       'updated_at': instance.updatedAt,
       'trx_date': instance.trxDate,
       'amount': instance.amount,
-      'period': instance.period,
+      'validity_period': instance.period,
       'jenis': instance.jenis,
     };

@@ -67,6 +67,8 @@ class BursaKerjaView extends StatelessWidget {
                             ),
                             Expanded(
                               child: TextFormField(
+                                onFieldSubmitted: (value) =>
+                                    {controller.search(value)},
                                 initialValue: null,
                                 decoration: const InputDecoration.collapsed(
                                   filled: true,
@@ -156,6 +158,12 @@ class BursaKerjaView extends StatelessWidget {
                         ),
                       ),
                     )),
+                    Container(
+                        child: (controller.isLoading.value)
+                            ? const Padding(
+                                padding: EdgeInsets.all(20),
+                                child: CircularProgressIndicator())
+                            : Row())
                   ]);
           }),
         );

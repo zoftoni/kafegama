@@ -26,6 +26,14 @@ class DonasiCampaignController extends GetxController {
     getData();
   }
 
+  Future<void> search(value) async {
+    keyword = value;
+    page = 0;
+    donasiCampaignList.clear();
+    _donasiCampaignList.clear();
+    getData();
+  }
+
   Future<void> getData() async {
     isLoading.value = true;
     APIProvider apiProvider = Get.find();
@@ -51,6 +59,7 @@ class DonasiCampaignController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 }

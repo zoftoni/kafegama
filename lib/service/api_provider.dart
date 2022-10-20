@@ -6,8 +6,8 @@ import 'package:get/get.dart' as getx;
 import 'package:kafegama/core.dart';
 
 class APIProvider {
-  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  static const String _baseUrl = 'https://kafegamaa.com/api/';
+  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  // static const String _baseUrl = 'https://kafegamaa.com/api/';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';
@@ -24,6 +24,7 @@ class APIProvider {
   static const String _DONASI_TRX = 'donasi-trx';
   static const String _IURAN_TRX = 'iuran-trx';
   static const String _JENIS_ANGGOTA = 'jenis-anggota';
+  static const String _FAQ = 'page-content?name=faq';
 
   final Dio _dio = Dio();
 
@@ -399,6 +400,18 @@ class APIProvider {
       // print("error");
       // print("Exception occured: $error stackTrace: $stacktrace");
       return IuranTrxList.withError(_handleError(e));
+    }
+  }
+
+  Future<FaqResponse> getFaq() async {
+    try {
+      Response response = await _dio.get(_FAQ);
+      return FaqResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return FaqResponse.withError(
+          _handleError(e), e.response != null ? e.response!.statusCode! : 500);
     }
   }
 }

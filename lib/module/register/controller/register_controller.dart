@@ -40,7 +40,7 @@ class RegisterController extends GetxController {
             result.error ?? "",
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.white,
-            onTap: (snack) => {Get.off(() => const MainView())},
+            onTap: (snack) => {Get.off(() => const LoginView())},
           );
           return;
         }

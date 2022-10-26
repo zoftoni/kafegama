@@ -33,13 +33,12 @@ class FaqView extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: const Center(child: Text("..loading...")),
                       )
-                    : Expanded(
-                        child: Padding(
+                    : Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SelectableHtml(
                           data: faq.content!,
                         ),
-                      ));
+                      );
               })),
         );
       },

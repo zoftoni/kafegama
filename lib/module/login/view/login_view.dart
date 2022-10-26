@@ -27,8 +27,8 @@ class LoginView extends StatelessWidget {
           body: SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              child: Column(
+            child: SingleChildScrollView(child: Obx(() {
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Column(
@@ -87,15 +87,24 @@ class LoginView extends StatelessWidget {
                                 child: TextFormField(
                                   textInputAction: TextInputAction.done,
                                   controller: controller.passC,
-                                  obscureText: true,
+                                  obscureText: controller.obsecureText.value,
                                   cursorColor: const Color(0xFF6F35A5),
-                                  decoration: const InputDecoration(
-                                    hintText: "password",
-                                    prefixIcon: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Icon(Icons.lock),
-                                    ),
-                                  ),
+                                  decoration: InputDecoration(
+                                      hintText: "password",
+                                      prefixIcon: const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Icon(Icons.lock),
+                                      ),
+                                      suffixIcon: IconButton(
+                                        // ignore: unrelated_type_equality_checks
+                                        icon: controller.obsecureText != false
+                                            ? const Icon(Icons.visibility)
+                                            : const Icon(Icons.visibility_off),
+                                        onPressed: () {
+                                          controller.obsecureText.value =
+                                              !(controller.obsecureText.value);
+                                        },
+                                      )),
                                 ),
                               ),
                               const SizedBox(height: 16.0),
@@ -170,8 +179,8 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
-            ),
+              );
+            })),
           ),
         );
       },

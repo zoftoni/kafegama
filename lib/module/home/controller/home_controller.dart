@@ -33,11 +33,61 @@ class HomeController extends GetxController {
       }
     });
 
-    getBeritaLatest()
-        .then((value) => getEventLatest().then((value) => getDonasiLatest()));
+    getBeritaLatest().then((value) =>
+        getEventLatest().then((value) => getDonasiLatest().then((value) {
+              // popup verif nim
+              if (user.value.nim == null) {
+                SessionManager().get("LAST_POPUP").then((value) {
+                  final date2 = DateTime.now();
+                  var lastPopupDate = DateTime.now();
+                  var diffInHours = 9999;
+
+                  if (value != null) {
+                    lastPopupDate = DateTime.parse(value);
+                    diffInHours = lastPopupDate.difference(date2).inHours;
+                  }
+                  if (diffInHours > 24) {
+                    SessionManager().set("LAST_POPUP", date2).then((value) {
+                      //showpopup
+                      Get.defaultDialog(
+                          title: "Verifikasi NIM",
+                          middleText:
+                              "Apakah Anda alumni FEB UGM ?\nSilahkan lengkapi NIM & Tahun Angkatan Anda ",
+                          backgroundColor: Colors.white,
+                          textConfirm: "YES",
+                          textCancel: "NO",
+                          radius: 6,
+                          onConfirm: () {
+                            Get.delete<HomeController>();
+                            Get.to(() => const VerifNimView());
+                          },
+                          onCancel: () {
+                            Get.back();
+                          });
+                    });
+                  }
+                });
+              }
+            })));
   }
 
   Future<void> handleRefresh() async {
+    //refresh user
+    APIProvider apiProvider = Get.find();
+    final result2 = await apiProvider.refreshUser();
+    if (result2.error != null) {
+      Get.snackbar(
+        "Error",
+        result2.error ?? "",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+      return;
+    }
+
+    await SessionManager().set("USER", result2.user).then((value) {
+      user.value = result2.user!;
+    });
     getData();
   }
 
@@ -108,6 +158,71 @@ class HomeController extends GetxController {
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.white,
         );
+      } else {
+        if (user.value.nim != null) {
+          await SessionManager().get("LAST_POPUP").then((value) {
+            final date2 = DateTime.now();
+            var lastPopupDate = DateTime.now();
+            var diffInHours = 9999;
+
+            if (value != null) {
+              lastPopupDate = DateTime.parse(value);
+              diffInHours = lastPopupDate.difference(date2).inHours;
+            }
+            if (diffInHours > 24) {
+              //showpopup
+              DonasiCampaign donasiRand = (result.data!..shuffle()).first;
+              SessionManager()
+                  .set("LAST_POPUP", date2.toString())
+                  .then((value) {
+                Get.dialog(Dialog(
+                  child: SizedBox(
+                    height: 300,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  donasiRand.picture!,
+                                ),
+                                fit: BoxFit.fitWidth,
+                                alignment: Alignment.topCenter),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            donasiRand.title!,
+                            overflow: TextOverflow.fade,
+                            maxLines: 5,
+                            softWrap: true,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => const DonasiCampaignDetailView(),
+                                    arguments: [
+                                      {"donasiCampaign": donasiRand}
+                                    ]);
+                              },
+                              child: const Text("Donasi"),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ));
+              });
+            }
+          });
+        }
       }
     } catch (e) {
       Get.snackbar(

@@ -10,6 +10,7 @@ class LoginController extends GetxController {
   RxBool obsecureText = true.obs;
   TextEditingController emailC = TextEditingController();
   TextEditingController passC = TextEditingController();
+  APIProvider apiProvider = Get.find();
 
   @override
   void onInit() async {
@@ -23,7 +24,6 @@ class LoginController extends GetxController {
   Future<void> login() async {
     if (emailC.text.isNotEmpty && passC.text.isNotEmpty) {
       isLoading.value = true;
-      APIProvider apiProvider = Get.find();
 
       try {
         final result = await apiProvider.login(emailC.text, passC.text);
@@ -55,8 +55,7 @@ class LoginController extends GetxController {
   }
 
   openResetPassword() async {
-    if (!await launchUrl(
-        Uri.parse("http://10.0.2.2/kafegama/public/admin/password/reset"),
+    if (!await launchUrl(Uri.parse(APIProvider.RESET_PASS_URL),
         mode: LaunchMode.externalApplication)) {
       throw 'Could not launch url';
     }

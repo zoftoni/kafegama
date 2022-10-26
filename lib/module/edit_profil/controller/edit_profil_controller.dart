@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kafegama/core.dart';
@@ -210,14 +211,28 @@ class EditProfilController extends GetxController {
         return;
       }
 
-      Get.defaultDialog(
-          title: "Success",
-          middleText: result.message ?? "",
+      //refresh user
+      final result2 = await apiProvider.refreshUser();
+      if (result2.error != null) {
+        Get.snackbar(
+          "Error",
+          result2.error ?? "",
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.white,
-          textConfirm: "OK",
-          radius: 6,
-          onConfirm: () {
-            Get.close(2);
+        );
+        return;
+      }
+
+      await SessionManager().set("USER", result2.user).then((value) => {
+            Get.defaultDialog(
+                title: "Success",
+                middleText: result.message ?? "",
+                backgroundColor: Colors.white,
+                textConfirm: "OK",
+                radius: 6,
+                onConfirm: () {
+                  Get.close(2);
+                })
           });
     } catch (e) {
       Get.snackbar(

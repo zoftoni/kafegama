@@ -23,65 +23,16 @@ class IuranHistoryView extends StatelessWidget {
             iconTheme: const IconThemeData(
               color: Colors.white,
             ),
-            title: const Text("IURAN MEMBERSHIP"),
+            title: const Text("IURAN HISTORY"),
           ),
           body: Obx(() {
             return Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 6.0,
-                    horizontal: 12.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12.0),
-                    ),
-                    border: Border.all(
-                      width: 1.0,
-                      color: Colors.grey[400]!,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.search),
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          onFieldSubmitted: (value) =>
-                              {controller.search(value)},
-                          initialValue: null,
-                          decoration: const InputDecoration.collapsed(
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            hintText: "Search",
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.sort,
-                            size: 20.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               Expanded(
                   child: LazyLoadScrollView(
                 onEndOfPage: () => controller.getData(),
                 child: RefreshIndicator(
                   onRefresh: () => controller.handleRefresh(),
-                  child: ListView.builder(
+                  child: ListView.separated(
                     itemCount: controller.iuranTrxList.length,
                     itemBuilder: (BuildContext context, int index) {
                       var iuranTrx = controller.iuranTrxList.elementAt(index);
@@ -99,6 +50,9 @@ class IuranHistoryView extends StatelessWidget {
                           : const SizedBox(
                               height: 20.0,
                             );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider();
                     },
                   ),
                 ),

@@ -46,6 +46,11 @@ class VerifNimView extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                  "Silahkan lengkapi NIM & Tahun Angkatan Anda"),
+                            ),
                             Container(
                               padding: const EdgeInsets.all(12),
                               margin: const EdgeInsets.only(),
@@ -74,24 +79,6 @@ class VerifNimView extends StatelessWidget {
                                   fillColor: Colors.white,
                                   labelText: "Angkatan Tahun",
                                   hintText: "Angkatan Tahun",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                onChanged: (value) {},
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              margin: const EdgeInsets.only(),
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                controller: controller.lulusanTahunC,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  labelText: "Lulusan Tahun",
-                                  hintText: "Lulusan Tahun",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../controller/donasi_payment_controller.dart';
+import 'package:kafegama/core.dart';
 
 import 'package:get/get.dart';
 
@@ -14,20 +14,122 @@ class DonasiPaymentView extends StatelessWidget {
         controller.view = this;
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("DonasiPayment"),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: const [
-                  //body
-                ],
+            appBar: AppBar(
+              elevation: 0.0,
+              flexibleSpace: const AppBarBG(),
+              centerTitle: true,
+              iconTheme: const IconThemeData(
+                color: Colors.white,
               ),
+              title: const Text("DONASI"),
             ),
-          ),
-        );
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Obx(
+                  () {
+                    var donasiCampaign = controller.donasiCampaign.value;
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Center(
+                            child: Text(
+                              donasiCampaign.title!,
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(),
+                          child: TextFormField(
+                            controller: controller.emailC,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: "Email",
+                              hintText: "Email",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(),
+                          child: TextFormField(
+                            controller: controller.noHpC,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: "No HP",
+                              hintText: "No HP",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(),
+                          child: TextFormField(
+                            controller: controller.amountC,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: "Nominal",
+                              hintText: "Nominal Donasi",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 40.0,
+                        ),
+                        Hero(
+                          tag: "payment_btn",
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              maximumSize: const Size(double.infinity, 56),
+                              minimumSize: const Size(double.infinity, 56),
+                            ),
+                            onPressed: () {
+                              controller.pay();
+                            },
+                            child: Text(
+                              "Payment".toUpperCase(),
+                            ),
+                          ),
+                        ),
+                        Container(
+                            child: (controller.isLoading.value)
+                                ? const Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: CircularProgressIndicator())
+                                : Row())
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ));
       },
     );
   }

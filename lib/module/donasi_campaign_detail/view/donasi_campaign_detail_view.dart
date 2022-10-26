@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:kafegama/shared/util/theme/appbar_bg.dart';
-import '../controller/donasi_campaign_detail_controller.dart';
+import 'package:kafegama/core.dart';
 
 import 'package:get/get.dart';
 
@@ -74,7 +73,12 @@ class DonasiCampaignDetailView extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.to(() => const DonasiPaymentView(),
+                                        arguments: [
+                                          {"donasiCampaign": donasiCampaign}
+                                        ]);
+                                  },
                                   child: const Text("Donasi"),
                                 ),
                               ],

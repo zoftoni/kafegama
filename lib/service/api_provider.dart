@@ -4,10 +4,16 @@ import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 import 'package:kafegama/core.dart';
+import 'package:kafegama/model/invoice/invoice_donasi.dart';
+import 'package:kafegama/model/invoice/invoice_iuran.dart';
 
 class APIProvider {
-  static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
-  // static const String _baseUrl = 'https://kafegamaa.com/api/';
+  // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
+  static const String _baseUrl = 'https://kafegamaa.com/api/';
+  // static const String RESET_PASS_URL =
+  //     'http://10.0.2.2/kafegama/public/admin/password/reset';
+  static const String RESET_PASS_URL =
+      'http://kafegamaa.com/admin/password/reset';
 
   static const String _LOGIN = 'login';
   static const String _REGISTER = 'register-user';
@@ -25,6 +31,8 @@ class APIProvider {
   static const String _IURAN_TRX = 'iuran-trx';
   static const String _JENIS_ANGGOTA = 'jenis-anggota';
   static const String _FAQ = 'page-content?name=faq';
+  static const String _PAY_DONASI = 'pay-donasi';
+  static const String _PAY_IURAN = 'pay-iuran';
 
   final Dio _dio = Dio();
 
@@ -70,9 +78,9 @@ class APIProvider {
             getx.Get.off(() => const LoginView());
           }
           // errorDescription = dioError.response?.data["error"];
-          errorDescription =
-              "Received invalid status code: ${dioError.response?.statusCode} ${dioError.response?.statusMessage}"
-              "\n${(dioError.response?.data is String) ? dioError.response?.data : dioError.response?.data["error"]}";
+          errorDescription = (dioError.response?.data is String)
+              ? dioError.response?.data
+              : dioError.response?.data["error"];
           break;
         case DioErrorType.sendTimeout:
           errorDescription = "Send timeout in connection with API server";
@@ -334,12 +342,10 @@ class APIProvider {
     }
   }
 
-  Future<MessageResponse> verifikasiNIM(
-      nim, angkatanTahun, lulusanTahun) async {
+  Future<MessageResponse> verifikasiNIM(nim, angkatanTahun) async {
     var formData = FormData.fromMap({
       'nim': nim,
       'angkatan_tahun': angkatanTahun,
-      'lulusan_tahun': lulusanTahun,
     });
     try {
       Response response = await _dio.post(_VERIFIKASI_NIM,
@@ -412,6 +418,43 @@ class APIProvider {
       // print("Exception occured: $error stackTrace: $stacktrace");
       return FaqResponse.withError(
           _handleError(e), e.response != null ? e.response!.statusCode! : 500);
+    }
+  }
+
+  Future<InvoiceDonasi> payDonasi(
+      String email, String noHp, int amount, int? idDonasiCampaign) async {
+    var formData = FormData.fromMap({
+      'id_donasi_campaign': idDonasiCampaign,
+      'email': email,
+      'no_hp': noHp,
+      'amount': amount,
+    });
+    try {
+      Response response = await _dio.post(_PAY_DONASI,
+          data: formData, options: Options(headers: {"requiresToken": true}));
+      // throwIfNoSuccess(response);
+      return InvoiceDonasi.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return InvoiceDonasi.withError(_handleError(e));
+    }
+  }
+
+  Future<InvoiceIuran> payIuran(
+      String email, String noHp, int? idJenisAnggota) async {
+    var formData = FormData.fromMap({
+      'id_jenis_anggota': idJenisAnggota,
+      'email': email,
+      'no_hp': noHp,
+    });
+    try {
+      Response response = await _dio.post(_PAY_IURAN,
+          data: formData, options: Options(headers: {"requiresToken": true}));
+      // throwIfNoSuccess(response);
+      return InvoiceIuran.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return InvoiceIuran.withError(_handleError(e));
     }
   }
 }

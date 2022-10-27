@@ -39,16 +39,17 @@ class UserProfileController extends GetxController {
 
     try {
       APIProvider apiProvider = Get.find();
-      final result = await apiProvider.logout();
-      if (result.error != null) {
-        Get.snackbar(
-          "Error",
-          result.error ?? "",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.white,
-        );
-        return;
-      }
+      await apiProvider.logout();
+      // final result = await apiProvider.logout();
+      // if (result.error != null) {
+      //   Get.snackbar(
+      //     "Error",
+      //     result.error ?? "",
+      //     snackPosition: SnackPosition.TOP,
+      //     backgroundColor: Colors.white,
+      //   );
+      //   return;
+      // }
 
       await SessionManager()
           .remove("USER")

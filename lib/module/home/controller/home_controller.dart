@@ -21,54 +21,56 @@ class HomeController extends GetxController {
   Future<void> getData() async {
     SessionManager().containsKey("USER").then((value) {
       if (value) {
-        SessionManager().get("USER").then((value) => {
-              if (value != null)
-                {user.value = User.fromJson(value)}
-              else
-                {user.value = User()}
-            });
+        SessionManager().get("USER").then((value) {
+          if (value != null) {
+            user.value = User.fromJson(value);
+            // popup verif nim
+            if (user.value.nim == null) {
+              SessionManager().get("LAST_POPUP").then((value2) {
+                final date2 = DateTime.now();
+                var lastPopupDate = DateTime.now();
+                var diffInHours = 9999;
+
+                if (value2 != null) {
+                  lastPopupDate = DateTime.parse(value2);
+                  diffInHours = lastPopupDate.difference(date2).inHours;
+                }
+                if (diffInHours > 24) {
+                  SessionManager()
+                      .set("LAST_POPUP", date2.toString())
+                      .then((value3) {
+                    //showpopup
+                    Get.defaultDialog(
+                        title: "Verifikasi NIM",
+                        middleText:
+                            "Apakah Anda alumni FEB UGM ?\nSilahkan lengkapi NIM & Tahun Angkatan Anda ",
+                        backgroundColor: Colors.white,
+                        textConfirm: "YES",
+                        textCancel: "NO",
+                        radius: 6,
+                        onConfirm: () {
+                          Get.delete<HomeController>();
+                          Get.off(() => const VerifNimView());
+                        },
+                        onCancel: () {
+                          Get.back();
+                        });
+                  });
+                }
+              });
+            }
+          } else {
+            user.value = User();
+          }
+        });
       } else {
         Get.off(() => const LoginView());
         return;
       }
     });
 
-    getBeritaLatest().then((value) =>
-        getEventLatest().then((value) => getDonasiLatest().then((value) {
-              // popup verif nim
-              if (user.value.nim == null) {
-                SessionManager().get("LAST_POPUP").then((value) {
-                  final date2 = DateTime.now();
-                  var lastPopupDate = DateTime.now();
-                  var diffInHours = 9999;
-
-                  if (value != null) {
-                    lastPopupDate = DateTime.parse(value);
-                    diffInHours = lastPopupDate.difference(date2).inHours;
-                  }
-                  if (diffInHours > 24) {
-                    SessionManager().set("LAST_POPUP", date2).then((value) {
-                      //showpopup
-                      Get.defaultDialog(
-                          title: "Verifikasi NIM",
-                          middleText:
-                              "Apakah Anda alumni FEB UGM ?\nSilahkan lengkapi NIM & Tahun Angkatan Anda ",
-                          backgroundColor: Colors.white,
-                          textConfirm: "YES",
-                          textCancel: "NO",
-                          radius: 6,
-                          onConfirm: () {
-                            Get.delete<HomeController>();
-                            Get.to(() => const VerifNimView());
-                          },
-                          onCancel: () {
-                            Get.back();
-                          });
-                    });
-                  }
-                });
-              }
-            })));
+    getBeritaLatest()
+        .then((value) => getEventLatest().then((value) => getDonasiLatest()));
   }
 
   Future<void> handleRefresh() async {

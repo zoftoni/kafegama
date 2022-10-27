@@ -81,7 +81,7 @@ class VerifNimController extends GetxController {
                 textConfirm: "OK",
                 radius: 6,
                 onConfirm: () {
-                  Get.off(() => const MainView());
+                  Get.offAll(() => const MainView());
                 })
           });
     } catch (e) {

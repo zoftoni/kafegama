@@ -11,7 +11,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> _navigateBasedOnLogin() async {
-    SessionManager().containsKey("USER").then((value) {
+    await SessionManager().containsKey("USER").then((value) {
       if (value) {
         Get.off(() => const MainView());
       } else {

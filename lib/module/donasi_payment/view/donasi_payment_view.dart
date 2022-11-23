@@ -46,46 +46,6 @@ class DonasiPaymentView extends StatelessWidget {
                           padding: const EdgeInsets.all(12),
                           margin: const EdgeInsets.only(),
                           child: TextFormField(
-                            controller: controller.emailC,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: "Email",
-                              hintText: "Email",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onChanged: (value) {},
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          margin: const EdgeInsets.only(),
-                          child: TextFormField(
-                            controller: controller.noHpC,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: "No HP",
-                              hintText: "No HP",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            onChanged: (value) {},
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          margin: const EdgeInsets.only(),
-                          child: TextFormField(
                             controller: controller.amountC,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(

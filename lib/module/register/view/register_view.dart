@@ -32,8 +32,8 @@ class RegisterView extends StatelessWidget {
               alignment: Alignment.center,
               children: <Widget>[
                 SafeArea(
-                  child: SingleChildScrollView(
-                    child: Column(
+                  child: SingleChildScrollView(child: Obx(() {
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Column(
@@ -182,9 +182,15 @@ class RegisterView extends StatelessWidget {
                             const Spacer(),
                           ],
                         ),
+                        Container(
+                            child: (controller.isLoading.value)
+                                ? const Padding(
+                                    padding: EdgeInsets.all(20),
+                                    child: CircularProgressIndicator())
+                                : Row())
                       ],
-                    ),
-                  ),
+                    );
+                  })),
                 ),
               ],
             ),

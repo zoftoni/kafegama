@@ -178,6 +178,12 @@ class LoginView extends StatelessWidget {
                       const Spacer(),
                     ],
                   ),
+                  Container(
+                      child: (controller.isLoading.value)
+                          ? const Padding(
+                              padding: EdgeInsets.all(20),
+                              child: CircularProgressIndicator())
+                          : Row())
                 ],
               );
             })),

@@ -421,12 +421,9 @@ class APIProvider {
     }
   }
 
-  Future<InvoiceDonasi> payDonasi(
-      String email, String noHp, int amount, int? idDonasiCampaign) async {
+  Future<InvoiceDonasi> payDonasi(int amount, int? idDonasiCampaign) async {
     var formData = FormData.fromMap({
       'id_donasi_campaign': idDonasiCampaign,
-      'email': email,
-      'no_hp': noHp,
       'amount': amount,
     });
     try {
@@ -440,12 +437,9 @@ class APIProvider {
     }
   }
 
-  Future<InvoiceIuran> payIuran(
-      String email, String noHp, int? idJenisAnggota) async {
+  Future<InvoiceIuran> payIuran(int? idJenisAnggota) async {
     var formData = FormData.fromMap({
       'id_jenis_anggota': idJenisAnggota,
-      'email': email,
-      'no_hp': noHp,
     });
     try {
       Response response = await _dio.post(_PAY_IURAN,

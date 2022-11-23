@@ -9,6 +9,9 @@ class InvoiceDonasi {
   @JsonKey(name: 'invoice_id')
   String? invoiceId;
   String? url;
+  @JsonKey(name: 'app_key')
+  String? appKey;
+  String? cluster;
   String? error;
 
   InvoiceDonasi({this.idDonasiTrx, this.invoiceId, this.url});

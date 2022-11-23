@@ -45,12 +45,15 @@ class RegisterController extends GetxController {
           return;
         }
 
-        Get.snackbar(
-          "Success",
-          result.message ?? "",
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.white,
-        );
+        Get.defaultDialog(
+            title: "Success",
+            middleText: result.message ?? "",
+            backgroundColor: Colors.white,
+            textConfirm: "OK",
+            radius: 6,
+            onConfirm: () {
+              Get.off(() => const LoginView());
+            });
         return;
       } catch (e) {
         Get.snackbar(

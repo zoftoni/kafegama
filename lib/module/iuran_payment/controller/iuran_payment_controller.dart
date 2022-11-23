@@ -1,16 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IuranPaymentController extends GetxController {
   IuranPaymentView? view;
   var jenisAnggota = JenisAnggota();
   RxBool isLoading = false.obs;
   var user = User().obs;
-
-  TextEditingController emailC = TextEditingController(text: '');
-  TextEditingController noHpC = TextEditingController(text: '');
 
   @override
   void onInit() {
@@ -21,8 +22,6 @@ class IuranPaymentController extends GetxController {
         SessionManager().get("USER").then((value) {
           if (value != null) {
             user.value = User.fromJson(value);
-            emailC.text = user.value.email!;
-            noHpC.text = user.value.noHp!;
           } else {
             user.value = User();
           }
@@ -40,8 +39,7 @@ class IuranPaymentController extends GetxController {
     APIProvider apiProvider = Get.find();
 
     try {
-      final result = await apiProvider.payIuran(
-          emailC.text, noHpC.text, jenisAnggota.idJenisAnggota);
+      final result = await apiProvider.payIuran(jenisAnggota.idJenisAnggota);
       if (result.error != null) {
         Get.snackbar(
           "Error",
@@ -52,10 +50,23 @@ class IuranPaymentController extends GetxController {
         return;
       }
 
-      //success
-      Get.to(() => const PaymentResultView(), arguments: [
-        {"type": "IURAN", "status": "SUCCESS"}
-      ]);
+      if (!await launchUrl(Uri.parse(result.url!),
+          mode: LaunchMode.externalApplication)) {
+        throw 'Could not launch url';
+      }
+
+      try {
+        PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
+        await pusher.init(
+          apiKey: result.appKey!,
+          cluster: result.cluster!,
+          onEvent: onEvent,
+        );
+        await pusher.subscribe(channelName: user.value.id.toString());
+        await pusher.connect();
+      } catch (e) {
+        log("ERROR: $e");
+      }
     } catch (e) {
       Get.snackbar(
         "Error",
@@ -65,6 +76,16 @@ class IuranPaymentController extends GetxController {
       );
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  void onEvent(PusherEvent event) {
+    log("onEvent: $event");
+    if (!event.data.isEmpty) {
+      //success
+      Get.to(() => const PaymentResultView(), arguments: [
+        {"type": "IURAN", "status": "SUCCESS"}
+      ]);
     }
   }
 }

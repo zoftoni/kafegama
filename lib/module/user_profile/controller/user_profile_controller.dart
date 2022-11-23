@@ -39,7 +39,7 @@ class UserProfileController extends GetxController {
 
     try {
       APIProvider apiProvider = Get.find();
-      await apiProvider.logout();
+      apiProvider.logout();
       // final result = await apiProvider.logout();
       // if (result.error != null) {
       //   Get.snackbar(
@@ -51,7 +51,7 @@ class UserProfileController extends GetxController {
       //   return;
       // }
 
-      await SessionManager()
+      SessionManager()
           .remove("USER")
           .then((value) => SessionManager().remove("TOKEN").then((value) {
                 isLoading.value = false;

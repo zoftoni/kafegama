@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:kafegama/core.dart';
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonasiPaymentController extends GetxController {
   DonasiPaymentView? view;
@@ -10,8 +14,6 @@ class DonasiPaymentController extends GetxController {
   var user = User().obs;
 
   TextEditingController amountC = TextEditingController(text: '');
-  TextEditingController emailC = TextEditingController(text: '');
-  TextEditingController noHpC = TextEditingController(text: '');
 
   @override
   void onInit() {
@@ -22,8 +24,6 @@ class DonasiPaymentController extends GetxController {
         SessionManager().get("USER").then((value) {
           if (value != null) {
             user.value = User.fromJson(value);
-            emailC.text = user.value.email!;
-            noHpC.text = user.value.noHp!;
           } else {
             user.value = User();
           }
@@ -42,7 +42,7 @@ class DonasiPaymentController extends GetxController {
       APIProvider apiProvider = Get.find();
 
       try {
-        final result = await apiProvider.payDonasi(emailC.text, noHpC.text,
+        final result = await apiProvider.payDonasi(
             int.parse(amountC.text), donasiCampaign.value.idDonasiCampaign);
         if (result.error != null) {
           Get.snackbar(
@@ -54,10 +54,23 @@ class DonasiPaymentController extends GetxController {
           return;
         }
 
-        //success
-        Get.to(() => const PaymentResultView(), arguments: [
-          {"type": "DONASI", "status": "SUCCESS"}
-        ]);
+        if (!await launchUrl(Uri.parse(result.url!),
+            mode: LaunchMode.externalApplication)) {
+          throw 'Could not launch url';
+        }
+
+        try {
+          PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
+          await pusher.init(
+            apiKey: result.appKey!,
+            cluster: result.cluster!,
+            onEvent: onEvent,
+          );
+          await pusher.subscribe(channelName: user.value.id.toString());
+          await pusher.connect();
+        } catch (e) {
+          log("ERROR: $e");
+        }
       } catch (e) {
         Get.snackbar(
           "Error",
@@ -68,6 +81,17 @@ class DonasiPaymentController extends GetxController {
       } finally {
         isLoading.value = false;
       }
+    }
+  }
+
+  void onEvent(PusherEvent event) {
+    log("onEvent: $event");
+
+    if (!event.data.isEmpty) {
+      //success
+      Get.to(() => const PaymentResultView(), arguments: [
+        {"type": "DONASI", "status": "SUCCESS"}
+      ]);
     }
   }
 }

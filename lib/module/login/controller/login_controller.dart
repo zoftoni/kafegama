@@ -17,7 +17,7 @@ class LoginController extends GetxController {
     super.onInit();
     var isUserExist = await SessionManager().containsKey("USER");
     if (isUserExist) {
-      // Get.offAll(const MainView());
+      Get.offAll(const MainView());
     }
   }
 
@@ -40,7 +40,7 @@ class LoginController extends GetxController {
         await SessionManager().set("USER", result.user).then((value) =>
             SessionManager()
                 .set("TOKEN", result.accessToken)
-                .then((value) => Get.off(() => const MainView())));
+                .then((value) => Get.offAll(() => const MainView())));
       } catch (e) {
         Get.snackbar(
           "Error",

@@ -9,6 +9,9 @@ class InvoiceIuran {
   @JsonKey(name: 'invoice_id')
   String? invoiceId;
   String? url;
+  @JsonKey(name: 'app_key')
+  String? appKey;
+  String? cluster;
   String? error;
 
   InvoiceIuran({this.idIuranTrx, this.invoiceId, this.url});

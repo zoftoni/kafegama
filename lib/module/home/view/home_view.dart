@@ -153,9 +153,18 @@ class HomeView extends StatelessWidget {
                                               },
                                               child: const Text("Verif NIM"),
                                             )
-                                          : const SizedBox(
-                                              height: 20.0,
-                                            ),
+                                          : (user.statusAnggota != "PREMIUM"
+                                              ? ElevatedButton(
+                                                  onPressed: () {
+                                                    Get.to(() =>
+                                                        const MembershipView());
+                                                  },
+                                                  child: const Text(
+                                                      "Beli Premium"),
+                                                )
+                                              : const SizedBox(
+                                                  height: 20.0,
+                                                )),
                                     ),
                                   ],
                                 ),

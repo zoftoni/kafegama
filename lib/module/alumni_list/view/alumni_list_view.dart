@@ -112,12 +112,17 @@ class AlumniListView extends StatelessWidget {
                                         : Get.defaultDialog(
                                             title: "Blocked",
                                             middleText:
-                                                "member PREMIUM bisa membuka data ini",
+                                                "Member PREMIUM bisa membuka data ini",
                                             backgroundColor: Colors.white,
-                                            textConfirm: "OK",
+                                            textConfirm: "Beli Premium",
+                                            textCancel: "OK",
                                             radius: 6,
-                                            onConfirm: () {
+                                            onCancel: () {
                                               Get.back();
+                                            },
+                                            onConfirm: () {
+                                              Get.to(
+                                                  () => const MembershipView());
                                             });
                                   },
                                   child: Card(

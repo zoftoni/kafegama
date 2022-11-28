@@ -6,6 +6,7 @@ import 'package:get/get.dart' as getx;
 import 'package:kafegama/core.dart';
 import 'package:kafegama/model/invoice/invoice_donasi.dart';
 import 'package:kafegama/model/invoice/invoice_iuran.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class APIProvider {
   // static const String _baseUrl = 'http://10.0.2.2/kafegama/public/api/';
@@ -75,7 +76,9 @@ class APIProvider {
           break;
         case DioErrorType.response:
           if (dioError.response?.statusCode == 401) {
-            getx.Get.off(() => const LoginView());
+            SessionManager().remove("USER");
+            getx.Get.offAll(() => const LoginView());
+            errorDescription = "Session Expired";
           }
           // errorDescription = dioError.response?.data["error"];
           errorDescription = (dioError.response?.data is String)

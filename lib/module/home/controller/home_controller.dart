@@ -171,7 +171,7 @@ class HomeController extends GetxController {
               lastPopupDate = DateTime.parse(value);
               diffInHours = lastPopupDate.difference(date2).inHours;
             }
-            if (diffInHours > 24) {
+            if (diffInHours > 24 && result.data!.isNotEmpty) {
               //showpopup
               DonasiCampaign donasiRand = (result.data!..shuffle()).first;
               SessionManager()

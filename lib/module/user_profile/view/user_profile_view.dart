@@ -28,7 +28,7 @@ class UserProfileView extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Obx(() {
                     var user = controller.user.value;
                     return controller.isLoading.value
@@ -119,11 +119,30 @@ class UserProfileView extends StatelessWidget {
                                             Icons.question_answer_outlined,
                                             "FAQ",
                                             "")),
+                                    InkWell(
+                                        onTap: () {
+                                          Get.defaultDialog(
+                                              title: "Confirm",
+                                              middleText:
+                                                  "Yakin menghapus akun ?",
+                                              backgroundColor: Colors.white,
+                                              textConfirm: "OK",
+                                              textCancel: "Cancel",
+                                              radius: 6,
+                                              onConfirm: () {
+                                                Get.back();
+                                                controller.deleteAccount();
+                                              });
+                                        },
+                                        child: MenuItem(
+                                            Icons.delete_forever_outlined,
+                                            "HAPUS AKUN",
+                                            "")),
                                   ],
                                 ),
                               ),
                               const SizedBox(
-                                height: 30.0,
+                                height: 10.0,
                               ),
                               InkWell(
                                 onTap: () => controller.logout(),

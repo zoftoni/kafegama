@@ -34,6 +34,7 @@ class APIProvider {
   static const String _FAQ = 'page-content?name=faq';
   static const String _PAY_DONASI = 'pay-donasi';
   static const String _PAY_IURAN = 'pay-iuran';
+  static const String _DELETE_ACCOUNT = 'delete-account';
 
   final Dio _dio = Dio();
 
@@ -142,6 +143,21 @@ class APIProvider {
     try {
       // String url = _baseUrl + _LOGIN;
       Response response = await _dio.post(_LOGOUT,
+          options: Options(
+              headers: {"requiresToken": true, "Accept": "application/json"}));
+      // throwIfNoSuccess(response);
+      return MessageResponse.fromJson(response.data);
+    } on DioError catch (e) {
+      // print("error");
+      // print("Exception occured: $error stackTrace: $stacktrace");
+      return MessageResponse.withError(_handleError(e));
+    }
+  }
+
+  Future<MessageResponse> deleteAccount() async {
+    try {
+      // String url = _baseUrl + _LOGIN;
+      Response response = await _dio.post(_DELETE_ACCOUNT,
           options: Options(
               headers: {"requiresToken": true, "Accept": "application/json"}));
       // throwIfNoSuccess(response);

@@ -68,4 +68,47 @@ class UserProfileController extends GetxController {
       );
     }
   }
+
+  Future<void> deleteAccount() async {
+    isLoading.value = true;
+    // APIProvider apiProvider = Get.find();
+
+    try {
+      APIProvider apiProvider = Get.find();
+      // apiProvider.deleteAccount();
+      final result = await apiProvider.deleteAccount();
+      if (result.error != null) {
+        Get.snackbar(
+          "Error",
+          result.error ?? "",
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.white,
+        );
+        return;
+      } else {
+        Get.defaultDialog(
+            title: "Success",
+            middleText: "Akun Anda Telah Dihapus",
+            backgroundColor: Colors.white,
+            textConfirm: "OK",
+            radius: 6,
+            onConfirm: () {
+              SessionManager().remove("USER").then(
+                  (value) => SessionManager().remove("TOKEN").then((value) {
+                        isLoading.value = false;
+                        // mainController.goToHome();
+                        Get.off(() => const LoginView());
+                      }));
+            });
+      }
+    } catch (e) {
+      isLoading.value = false;
+      Get.snackbar(
+        "Error",
+        "error:: $e",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white,
+      );
+    }
+  }
 }

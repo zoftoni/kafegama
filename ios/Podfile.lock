@@ -1,0 +1,81 @@
+PODS:
+  - Flutter (1.0.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - NWWebSocket (0.5.2)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - pusher_channels_flutter (0.0.1):
+    - Flutter
+    - PusherSwift (~> 10.1.1)
+  - PusherSwift (10.1.2):
+    - NWWebSocket (~> 0.5.2)
+    - TweetNacl (~> 1.0.0)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - TweetNacl (1.0.2)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+  - wakelock (0.0.1):
+    - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - pusher_channels_flutter (from `.symlinks/plugins/pusher_channels_flutter/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+
+SPEC REPOS:
+  trunk:
+    - NWWebSocket
+    - PusherSwift
+    - TweetNacl
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+  pusher_channels_flutter:
+    :path: ".symlinks/plugins/pusher_channels_flutter/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  NWWebSocket: 21f0c73639815da3272862c912275b26102aa80c
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  pusher_channels_flutter: bf646336659d2cc058c62346b4b9e8b82e37b71b
+  PusherSwift: fb30ba1dcbe09a6ca257ccb39dc2f84866e811b4
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
+  wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
+  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
+
+COCOAPODS: 1.11.3
